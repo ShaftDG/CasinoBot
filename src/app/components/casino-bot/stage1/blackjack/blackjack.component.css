@@ -1,0 +1,56 @@
+.chose-info {
+  font-size: 14pt;
+  float: bottom;
+}
+
+.card {
+  width: 200px;
+  height: 360px;
+  float: left;
+  margin-bottom: 2%;
+  margin-right: 2%;
+}
+
+.container {
+  width: 100%;
+  float: left;
+}
+
+@media all and (max-width:640px) {
+  .card {
+    width: 93%;
+    float: left;
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+}
+
+.button-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  margin-right: 1%;
+}
+
+.container-button {
+  width: 100%;
+  margin-bottom: 4%;
+}
+
+.container-checkbox {
+  width: 100%;
+  margin-bottom: 4%;
+  margin-top: 4%;
+}
+
+.select {
+  margin-bottom: 1%;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}

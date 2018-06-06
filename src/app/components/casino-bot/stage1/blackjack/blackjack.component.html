@@ -1,9 +1,64 @@
-<mat-grid-list cols="4" rowHeight="100px">
-  <mat-grid-tile
-    *ngFor="let tile of tiles"
-    [colspan]="tile.cols"
-    [rowspan]="tile.rows"
-    [style.background]="tile.color">
-    {{tile.text}}
-  </mat-grid-tile>
-</mat-grid-list>
+<form>
+  <div class="container">
+      <mat-card class="card" >
+        <div>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <!-- value Column -->
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef> Value </th>
+                <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+      </mat-card>
+      <mat-card class="card">
+        <div>
+          <mat-form-field>
+            <mat-select class="select" placeholder="Choose provider" [(ngModel)]="selectedValueProviders" name="food">
+              <mat-option *ngFor="let provider of providers" [value]="provider.viewValue">
+                {{provider.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="container-button">
+            <button mat-raised-button class="button" routerLink="/about">Options</button>
+          </div>
+          <div class="container-button">
+            <button mat-raised-button class="button" routerLink="/about">Betting of players</button>
+          </div>
+          <div class="container-checkbox">
+            <mat-checkbox>Money game</mat-checkbox>
+          </div>
+          <div class="container-checkbox">
+            <mat-checkbox>AutoPlay</mat-checkbox>
+          </div>
+          <div class="container-checkbox">
+            <mat-checkbox>Stage 1</mat-checkbox>
+          </div>
+          <div class="container-checkbox">
+            <mat-checkbox>Force stage 2</mat-checkbox>
+          </div>
+        </div>
+      </mat-card>
+  </div>
+  <div class="button-row">
+    <button mat-raised-button class="button" routerLink="/about">Start</button>
+    <button mat-raised-button class="button" routerLink="/about">Pause</button>
+    <button mat-raised-button class="button" routerLink="/about">Restart</button>
+    <button mat-raised-button class="button" routerLink="/about">Debug</button>
+    <button mat-raised-button class="button" routerLink="/about">Task</button>
+  </div>
+</form>

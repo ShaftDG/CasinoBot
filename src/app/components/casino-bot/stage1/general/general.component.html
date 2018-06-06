@@ -1,21 +1,35 @@
 <form>
-  <mat-form-field>
-    <mat-select placeholder="Choose game" [(ngModel)]="selectedValueGame" name="food">
-      <mat-option *ngFor="let game of games" [value]="game.viewValue">
-        {{game.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <p></p>
-  <!-- <p class ="chose-info"> You chose the game: {{selectedValueGame}} </p> -->
+  <mat-card class="card" >
+      <div>
+      <mat-form-field>
+        <mat-select placeholder="Choose game" [(ngModel)]="selectedValueGame" name="food">
+          <mat-option *ngFor="let game of games" [value]="game.viewValue">
+            {{game.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-   <mat-form-field>
-     <mat-select placeholder="Choose provider" [(ngModel)]="selectedValueProviders" name="food">
-       <mat-option *ngFor="let provider of providers" [value]="provider.viewValue">
-         {{provider.viewValue}}
-       </mat-option>
-     </mat-select>
-   </mat-form-field>
+      <p class ="chose-info"> You chose the game: {{selectedValueGame}} </p>
+      </div>
+  </mat-card>
+  <mat-card class="card">
+      <div>
+       <mat-form-field>
+         <mat-select placeholder="Choose provider" [(ngModel)]="selectedValueProviders" name="food">
+           <mat-option *ngFor="let provider of providers" [value]="provider.viewValue">
+             {{provider.viewValue}}
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
 
-  <!-- <p class ="chose-info"> You chose a provider: {{selectedValueProviders}} </p> -->
+      <p class ="chose-info"> You chose a provider: {{selectedValueProviders}} </p>
+      </div>
+  </mat-card>
+        <div class="button-row">
+          <button mat-raised-button class="button" routerLink="/about">Start</button>
+          <button mat-raised-button class="button" routerLink="/about">Pause</button>
+          <button mat-raised-button class="button" routerLink="/about">Restart</button>
+          <button mat-raised-button class="button" routerLink="/about">Debug</button>
+          <button mat-raised-button class="button" routerLink="/about">Task</button>
+        </div>
  </form>

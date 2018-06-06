@@ -14,6 +14,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from './about/about.component';
@@ -51,6 +53,8 @@ const routes: Routes = [
     MatTabsModule,
     MatGridListModule,
     MatSelectModule,
+    MatTableModule,
+    MatCheckboxModule,
 
     RouterModule.forRoot(routes)
   ],
