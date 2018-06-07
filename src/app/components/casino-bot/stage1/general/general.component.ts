@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-general',
@@ -6,23 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./general.component.css']
 })
 export class GeneralComponent implements OnInit {
-  selectedValueGame: string;
 
-  games = [
-    {value: 'blackjack-0', viewValue: 'Blackjack'},
-    {value: 'roulette-1', viewValue: 'Roulette'},
-    {value: 'slot-2', viewValue: 'Slot'}
-  ];
+  @Input() gamesGeneralStage1 = [];
 
-  selectedValueProviders: string;
+  @Input() providersGeneralStage1 = [];
 
-  providers = [
-    {value: 'parimatch9087-0', viewValue: 'parimatch9087'},
-    {value: 'parimatch9086-1', viewValue: 'parimatch9086'},
-    {value: 'parimatch4125-2', viewValue: 'parimatch4125'},
-    {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
-  ];
+  @Input() selectedValueGameGeneralStage1: string;
+  @Output() selectedValueGameGeneralStage1Change = new EventEmitter<string>();
+  onGameChange(model: string){
+    this.selectedValueGameGeneralStage1 = model;
+    this.selectedValueGameGeneralStage1Change.emit(model);
+  }
 
+  @Input() selectedValueProviderGeneralStage1: string;
+  @Output() selectedValueProviderGeneralStage1Change = new EventEmitter<string>();
+  onProviderChange(model: string){
+    this.selectedValueProviderGeneralStage1 = model;
+    this.selectedValueProviderGeneralStage1Change.emit(model);
+  }
 
   constructor() { }
 

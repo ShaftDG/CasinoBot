@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-blackjack',
@@ -6,42 +7,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blackjack.component.css']
 })
 export class BlackjackComponent implements OnInit {
-  tiles = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
 
+ //checkboxes
+  @Input() isMoneyGame:boolean;
+  @Output() isMoneyGameChange = new EventEmitter<boolean>();
+  onMoneyGameChange(model: boolean){
+    this.isMoneyGame = model;
+    this.isMoneyGameChange.emit(model);
+  }
+  @Input() isAutoPlay:boolean;
+  @Output() isAutoPlayChange = new EventEmitter<boolean>();
+  onAutoPlayChange(model: boolean){
+    this.isAutoPlay = model;
+    this.isAutoPlayChange.emit(model);
+  }
+  @Input() isStage1:boolean;
+  @Output() isStage1Change = new EventEmitter<boolean>();
+  onStage1Change(model: boolean){
+    this.isStage1 = model;
+    this.isStage1Change.emit(model);
+  }
+  @Input() isForceStage2:boolean;
+  @Output() isForceStage2Change = new EventEmitter<boolean>();
+  onForceStage2Change(model: boolean){
+    this.isForceStage2 = model;
+    this.isForceStage2Change.emit(model);
+  }
+
+  //select
+  @Input() providersBlackjackStage1 = [];
+  @Input() selectedValueProviderBlackjackStage1: string;
+  @Output() selectedValueProviderBlackjackStage1Change = new EventEmitter<string>();
+  onProviderChange(model: string){
+    this.selectedValueProviderBlackjackStage1 = model;
+    this.selectedValueProviderBlackjackStage1Change.emit(model);
+  }
+
+  //table
   displayedColumns = ['name', 'value'];
-  dataSource = ELEMENT_DATA;
+  pageSize = 5;
+  @Input() dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-  selectedValueProviders: string;
-
-  providers = [
-    {value: 'parimatch9087-0', viewValue: 'parimatch9087'},
-    {value: 'parimatch9086-1', viewValue: 'parimatch9086'},
-    {value: 'parimatch4125-2', viewValue: 'parimatch4125'},
-    {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
-  ];
   constructor() { }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
 }
 
-export interface PeriodicElement {
-  name: string;
-  value: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {name: '1', value: '5,10,7'},
-  {name: '2', value: '3,8,9'},
-  {name: '3', value: '6,4,5'},
-  {name: '3', value: '6,4,5'},
-  {name: '3', value: '6,4,5'},
-  {name: '4', value: '5,9,4'}
-];

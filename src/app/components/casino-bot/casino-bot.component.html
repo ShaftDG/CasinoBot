@@ -1,17 +1,30 @@
-<mat-card>
+<mat-card  class="card">
   <mat-card-content>
-    <h2 class="example-h2">{{title}}</h2>
+    <h2 class="example-h2">{{title}} </h2>
     <mat-tab-group class="demo-tab-group">
       <mat-tab label="Stage 1">
         <mat-tab-group class="demo-tab-group">
             <mat-tab label="General">
               <div class="demo-tab-content">
-                <app-general></app-general>
+                <app-general [gamesGeneralStage1]="gamesGeneralStage1"
+                             [providersGeneralStage1]="providersGeneralStage1"
+                             [(selectedValueGameGeneralStage1)] = "selectedValueGameGeneralStage1"
+                             [(selectedValueProviderGeneralStage1)] = "selectedValueProviderGeneralStage1"
+                >
+                </app-general>
               </div>
             </mat-tab>
             <mat-tab label="Blackjack">
               <div class="demo-tab-content">
-              <app-blackjack></app-blackjack>
+              <app-blackjack [providersBlackjackStage1]="providersBlackjackStage1"
+                             [(selectedValueProviderBlackjackStage1)] = "selectedValueProviderBlackjackStage1"
+                             [dataSource]="dataSource"
+                             [(isMoneyGame)]="isMoneyGame"
+                             [(isAutoPlay)]="isAutoPlay"
+                             [(isStage1)]="isStage1"
+                             [(isForceStage2)]="isForceStage2"
+              >
+              </app-blackjack>
               </div>
             </mat-tab>
             <mat-tab label="Roulette">
@@ -84,3 +97,9 @@
     </mat-tab-group>
   </mat-card-content>
 </mat-card>
+<mat-card class="card">
+    <div class="button-row">
+      <button mat-raised-button class="button " (click)="ngOnUpdate()">Apply</button>
+    </div>
+</mat-card>
+

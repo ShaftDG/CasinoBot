@@ -16,6 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from './about/about.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
+    MatPaginatorModule,
 
     RouterModule.forRoot(routes)
   ],

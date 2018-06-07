@@ -1,8 +1,8 @@
 <form>
   <div class="container">
       <mat-card class="card" >
-        <div>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
 
               <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
@@ -22,13 +22,18 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+          <mat-paginator [pageSize]="pageSize"></mat-paginator>
         </div>
       </mat-card>
       <mat-card class="card">
         <div>
           <mat-form-field>
-            <mat-select class="select" placeholder="Choose provider" [(ngModel)]="selectedValueProviders" name="food">
-              <mat-option *ngFor="let provider of providers" [value]="provider.viewValue">
+            <mat-select class="select" placeholder="Choose provider"
+                        [(ngModel)]="selectedValueProviderBlackjackStage1"
+                        name="provider"
+                        (ngModelChange)="onProviderChange($event)"
+            >
+              <mat-option *ngFor="let provider of providersBlackjackStage1" [value]="provider.viewValue">
                 {{provider.viewValue}}
               </mat-option>
             </mat-select>
@@ -40,25 +45,38 @@
             <button mat-raised-button class="button" routerLink="/about">Betting of players</button>
           </div>
           <div class="container-checkbox">
-            <mat-checkbox>Money game</mat-checkbox>
+              <mat-checkbox [(ngModel)]="isMoneyGame"
+                            name="isMoneyGame"
+                            (change)="isMoneyGame = !isMoneyGame"
+                            (ngModelChange)="onMoneyGameChange($event)"
+              >Money game
+              </mat-checkbox>
           </div>
           <div class="container-checkbox">
-            <mat-checkbox>AutoPlay</mat-checkbox>
+              <mat-checkbox [(ngModel)]="isAutoPlay"
+                            name="isAutoPlay"
+                            (change)="isAutoPlay = !isAutoPlay"
+                            (ngModelChange)="onAutoPlayChange($event)"
+              >AutoPlay
+              </mat-checkbox>
           </div>
           <div class="container-checkbox">
-            <mat-checkbox>Stage 1</mat-checkbox>
+              <mat-checkbox [(ngModel)]="isStage1"
+                            name="isStage1"
+                            (change)="isStage1 = !isStage1"
+                            (ngModelChange)="onStage1Change($event)"
+              >Stage 1
+              </mat-checkbox>
           </div>
           <div class="container-checkbox">
-            <mat-checkbox>Force stage 2</mat-checkbox>
+              <mat-checkbox [(ngModel)]="isForceStage2"
+                            name="isForceStage2"
+                            (change)="isForceStage2 = !isForceStage2"
+                            (ngModelChange)="onForceStage2Change($event)"
+              >Force stage 2
+              </mat-checkbox>
           </div>
         </div>
       </mat-card>
-  </div>
-  <div class="button-row">
-    <button mat-raised-button class="button" routerLink="/about">Start</button>
-    <button mat-raised-button class="button" routerLink="/about">Pause</button>
-    <button mat-raised-button class="button" routerLink="/about">Restart</button>
-    <button mat-raised-button class="button" routerLink="/about">Debug</button>
-    <button mat-raised-button class="button" routerLink="/about">Task</button>
   </div>
 </form>
