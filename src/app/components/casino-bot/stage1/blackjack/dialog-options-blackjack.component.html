@@ -1,0 +1,14 @@
+<form>
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p class="chose-info">What's your favorite animal?</p>
+  <mat-form-field class="dialog-input">
+    <input matInput placeholder="Favorite food" [(ngModel)]="data.animal" name="animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div>
+</form>
+

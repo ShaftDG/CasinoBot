@@ -25,10 +25,10 @@
           <mat-paginator [pageSize]="pageSize"></mat-paginator>
         </div>
       </mat-card>
-      <mat-card class="card">
+      <mat-card class="card-options">
         <div>
-          <mat-form-field>
-            <mat-select class="select" placeholder="Choose provider"
+          <mat-form-field class="select">
+            <mat-select placeholder="Choose provider"
                         [(ngModel)]="selectedValueProviderBlackjackStage1"
                         name="provider"
                         (ngModelChange)="onProviderChange($event)"
@@ -39,7 +39,7 @@
             </mat-select>
           </mat-form-field>
           <div class="container-button">
-            <button mat-raised-button class="button" routerLink="/about">Options</button>
+            <button mat-raised-button class="button" (click)="openDialog()">Options</button>
           </div>
           <div class="container-button">
             <button mat-raised-button class="button" routerLink="/about">Betting of players</button>

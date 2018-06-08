@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-blackjack',
@@ -49,7 +50,25 @@ export class BlackjackComponent implements OnInit {
   @Input() dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() { }
+  //options
+  animal: string;
+  name: string;
+
+  constructor(public dialog: MatDialog) { }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogOptionsBlackjack, {
+      width: '300px',
+      data: { name: this.name, animal: this.animal },
+      disableClose: true,
+      closeOnNavigation: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -57,4 +76,19 @@ export class BlackjackComponent implements OnInit {
 
 }
 
+@Component({
+  selector: 'dialog-options-blackjack',
+  templateUrl: './dialog-options-blackjack.component.html',
+  styleUrls: ['./dialog-options-blackjack.component.css']
+})
+export class DialogOptionsBlackjack {
 
+  constructor(
+    public dialogRef: MatDialogRef<DialogOptionsBlackjack>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}

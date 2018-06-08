@@ -17,11 +17,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from './about/about.component';
 import { CasinoBotComponent } from './components/casino-bot/casino-bot.component';
-import { BlackjackComponent } from './components/casino-bot/stage1/blackjack/blackjack.component';
+import { BlackjackComponent, DialogOptionsBlackjack } from './components/casino-bot/stage1/blackjack/blackjack.component';
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
 
 const routes: Routes = [
@@ -30,12 +32,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [BlackjackComponent, DialogOptionsBlackjack],
   declarations: [
     AppComponent,
     MainComponent,
     AboutComponent,
     CasinoBotComponent,
-    BlackjackComponent,
+    BlackjackComponent, DialogOptionsBlackjack,
     GeneralComponent
   ],
   imports: [
@@ -57,6 +60,8 @@ const routes: Routes = [
     MatTableModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatDialogModule,
+    MatInputModule,
 
     RouterModule.forRoot(routes)
   ],

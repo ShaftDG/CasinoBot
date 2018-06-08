@@ -4,24 +4,37 @@
 }
 
 .card {
-  width: 250px;
+  width: 320px;
+  height: 360px;
+  float: left;
+  margin-bottom: 1%;
+  margin-left: 1%;
+}
+
+.card-options {
+  width: 220px;
   height: 360px;
   float: left;
   margin-bottom: 2%;
-  margin-right: 2%;
+  margin-left: 1%;
 }
 
 .container {
-  width: 100%;
-  float: left;
+
 }
 
-@media all and (max-width:640px) {
+@media all and (max-width:755px) {
   .card {
-    width: 93%;
+    width: 90%;
     float: left;
-    margin-bottom: 2%;
-    margin-right: 2%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+  }
+  .card-options {
+    width: 90%;
+    float: left;
+    margin-bottom: 1%;
+    margin-left: 1%;
   }
 }
 
@@ -32,7 +45,7 @@
 }
 
 .button {
-  margin-right: 1%;
+  width: 100%;
 }
 
 .container-button {
@@ -47,7 +60,6 @@
 }
 
 .select {
-  margin-bottom: 1%;
   width: 100%;
 }
 
