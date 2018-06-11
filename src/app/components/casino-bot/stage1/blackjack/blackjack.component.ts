@@ -51,22 +51,46 @@ export class BlackjackComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   //options
-  animal: string;
-  name: string;
+  @Input() dataOptions: OptionsElements;
+  @Output() dataOptionsChange = new EventEmitter<OptionsElements>();
+  onDataOptionsChange(model: OptionsElements){
+    this.dataOptions = model;
+    this.dataOptionsChange.emit(model);
+  }
 
-  constructor(public dialog: MatDialog) { }
+  //table
+  displayedColumnsBettingOfplayers = ['item', 'player', 'bet'];
+  pageSizeBetting = 3;
+  @Input() dataSourceBettingOfPlayers;
+
+  constructor(public dialog: MatDialog, public dialogBetting: MatDialog) {
+  }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogOptionsBlackjack, {
-      width: '300px',
-      data: { name: this.name, animal: this.animal },
+      width: '515px',
+      data: this.dataOptions,
       disableClose: true,
       closeOnNavigation: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      this.onDataOptionsChange(result);
+    });
+  }
+
+  openDialogBettingOfPlayers(): void {
+    let dialogRef = this.dialogBetting.open(DialogBettingOfPlayers, {
+      width: '515px',
+      data: { dataSource: this.dataSourceBettingOfPlayers, nameColumn: this.displayedColumnsBettingOfplayers, pageSize: this.pageSizeBetting },
+      disableClose: true,
+      closeOnNavigation: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    //  this.onDataOptionsChange(result);
     });
   }
 
@@ -82,13 +106,37 @@ export class BlackjackComponent implements OnInit {
   styleUrls: ['./dialog-options-blackjack.component.css']
 })
 export class DialogOptionsBlackjack {
-
   constructor(
     public dialogRef: MatDialogRef<DialogOptionsBlackjack>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  onNoClick(): void {
+ /* onNoClick(): void {
     this.dialogRef.close();
-  }
+  }*/
 
+}
+
+@Component({
+  selector: 'dialog-betting-of-players',
+  templateUrl: './dialog-betting-of-players.component.html',
+  styleUrls: ['./dialog-betting-of-players.component.css']
+})
+export class DialogBettingOfPlayers {
+  constructor(
+    public dialogRef1: MatDialogRef<DialogBettingOfPlayers>,
+    @Inject(MAT_DIALOG_DATA) public dataBetting: any) { }
+
+  /* onNoClick(): void {
+     this.dialogRef.close();
+   }*/
+
+}
+
+export interface OptionsElements {
+  amountOfReplenishment:number;
+  maxCountGamesStage1:number;
+  maxWinGamesStage1:number;
+  maxBalanceStage1:number;
+  maxWinGamesStage2:number;
+  maxBalanceStage2:number;
 }

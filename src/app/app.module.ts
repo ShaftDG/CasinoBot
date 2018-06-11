@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -7,7 +8,7 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
@@ -19,11 +20,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from './about/about.component';
 import { CasinoBotComponent } from './components/casino-bot/casino-bot.component';
-import { BlackjackComponent, DialogOptionsBlackjack } from './components/casino-bot/stage1/blackjack/blackjack.component';
+import { BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers } from './components/casino-bot/stage1/blackjack/blackjack.component';
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
 
 const routes: Routes = [
@@ -32,13 +34,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  entryComponents: [BlackjackComponent, DialogOptionsBlackjack],
+  entryComponents: [BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers],
   declarations: [
     AppComponent,
     MainComponent,
     AboutComponent,
     CasinoBotComponent,
-    BlackjackComponent, DialogOptionsBlackjack,
+    BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers,
     GeneralComponent
   ],
   imports: [
@@ -46,7 +48,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     NoopAnimationsModule,
 
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -62,6 +64,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatDialogModule,
     MatInputModule,
+    MatExpansionModule,
 
     RouterModule.forRoot(routes)
   ],
@@ -69,3 +72,5 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

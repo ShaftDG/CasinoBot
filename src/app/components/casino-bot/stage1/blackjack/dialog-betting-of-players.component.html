@@ -1,0 +1,41 @@
+<form>
+  <div mat-dialog-content>
+    <p class="chose-info">Options / Stage 1 / Blackjack</p>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataBetting.dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- items Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Items </th>
+          <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+        </ng-container>
+
+        <!-- players Column -->
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element.player}} </td>
+        </ng-container>
+
+        <!-- bet Column -->
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Bet </th>
+          <td mat-cell *matCellDef="let element"> {{element.bet}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="dataBetting.nameColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: dataBetting.nameColumn;"></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div mat-dialog-actions>
+    <div class="container-button-ok">
+      <button mat-button [mat-dialog-close]="dataBetting" cdkFocusInitial>Ok</button>
+    </div>
+  </div>
+</form>
+

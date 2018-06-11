@@ -6,3 +6,27 @@
 .dialog-input {
   width: 100%;
 }
+
+.input {
+  width: 100%;
+}
+
+.input-stage2 {
+  width: calc(95%/2);
+  margin-right: 2%;
+}
+
+.input-stage1 {
+  width: calc(94%/3);
+  margin-right: 2%;
+}
+
+.container-input {
+  width: 100%;
+  text-align: center;
+}
+
+.container-button-ok {
+  width: 100%;
+  text-align: right;
+}

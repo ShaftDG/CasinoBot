@@ -42,7 +42,7 @@
             <button mat-raised-button class="button" (click)="openDialog()">Options</button>
           </div>
           <div class="container-button">
-            <button mat-raised-button class="button" routerLink="/about">Betting of players</button>
+            <button mat-raised-button class="button" (click)="openDialogBettingOfPlayers()">Betting of players</button>
           </div>
           <div class="container-checkbox">
               <mat-checkbox [(ngModel)]="isMoneyGame"
