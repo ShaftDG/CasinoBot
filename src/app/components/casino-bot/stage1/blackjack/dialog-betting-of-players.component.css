@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+.chose-info {
+  font-size: 14pt;
+  text-align: center;
+}
+
+.container-button-ok {
+  width: 100%;
+  text-align: right;
+}
+.mat-cell.mat-column-bet {
+  cursor: pointer;
+}

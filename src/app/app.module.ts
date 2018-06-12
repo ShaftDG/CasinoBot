@@ -21,11 +21,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { SatPopoverModule } from '@ncstate/sat-popover';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from './about/about.component';
 import { CasinoBotComponent } from './components/casino-bot/casino-bot.component';
-import { BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers } from './components/casino-bot/stage1/blackjack/blackjack.component';
+import { BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent } from './components/casino-bot/stage1/blackjack/blackjack.component';
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
 
 const routes: Routes = [
@@ -40,7 +41,7 @@ const routes: Routes = [
     MainComponent,
     AboutComponent,
     CasinoBotComponent,
-    BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers,
+    BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent,
     GeneralComponent
   ],
   imports: [
@@ -65,6 +66,7 @@ const routes: Routes = [
     MatDialogModule,
     MatInputModule,
     MatExpansionModule,
+    SatPopoverModule,
 
     RouterModule.forRoot(routes)
   ],

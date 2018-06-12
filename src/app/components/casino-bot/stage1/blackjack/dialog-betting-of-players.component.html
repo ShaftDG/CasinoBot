@@ -1,6 +1,6 @@
 <form>
   <div mat-dialog-content>
-    <p class="chose-info">Options / Stage 1 / Blackjack</p>
+    <p class="chose-info">Options / Stage 1 / Betting of players</p>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataBetting.dataSource">
 
@@ -8,28 +8,47 @@
               The actual rendered columns are set as a property on the row definition" -->
 
         <!-- items Column -->
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="item">
           <th mat-header-cell *matHeaderCellDef> Items </th>
           <td mat-cell *matCellDef="let element"> {{element.item}} </td>
         </ng-container>
 
         <!-- players Column -->
-        <ng-container matColumnDef="value">
+        <ng-container matColumnDef="player">
           <th mat-header-cell *matHeaderCellDef> Value </th>
-          <td mat-cell *matCellDef="let element"> {{element.player}} </td>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox [value]="element.player"
+                          [(ngModel)]="element.player"
+                          name="element.player"
+            ></mat-checkbox>
+          </td>
         </ng-container>
 
         <!-- bet Column -->
-        <ng-container matColumnDef="value">
+        <ng-container matColumnDef="bet">
           <th mat-header-cell *matHeaderCellDef> Bet </th>
-          <td mat-cell *matCellDef="let element"> {{element.bet}} </td>
+          <td mat-cell *matCellDef="let element" [satPopoverAnchorFor]="p" (click)="p.open()">
+         <!--   <mat-form-field floatLabel="never">
+              <input matInput type="number" placeholder="Bet" [value]="element.bet" [(ngModel)]="element.bet" name="element.bet">
+            </mat-form-field> -->
+            <ng-container *ngIf="element.bet">
+              {{element.bet}}
+            </ng-container>
+            <sat-popover #p
+                         hasBackdrop
+                         xAlign="start"
+                         yAlign="start"
+                         (closed)="update(element, $event)">
+              <inline-edit [value]="element.bet"></inline-edit>
+            </sat-popover>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="dataBetting.nameColumn"></tr>
         <tr mat-row *matRowDef="let row; columns: dataBetting.nameColumn;"></tr>
       </table>
     </div>
-
+    <p></p>
   </div>
 
   <div mat-dialog-actions>

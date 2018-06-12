@@ -64,7 +64,8 @@ export class CasinoBotComponent implements OnInit {
     console.log("isStage1",this.isStage1);
     console.log("isForceStage2",this.isForceStage2);*/
 
-    console.log("dataOptions",this.dataOptions);
+    //console.log("dataOptions",this.dataOptions);
+    console.log("dataSourceBettingOfPlayers",this.dataSourceBettingOfPlayers.data);
   }
 
 }
