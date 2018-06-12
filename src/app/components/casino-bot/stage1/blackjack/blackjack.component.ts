@@ -143,7 +143,7 @@ export class DialogBettingOfPlayers {
 
     dt: any;
   ngOnInit() {
-    this.dt = new ExampleDataSource(this.dataBetting.dataSource.data);
+    this.dt = new BettingDataSource(this.dataBetting.dataSource.data);
   }
 
   update(el: ElmentOfBetting, bet: number) {
@@ -177,21 +177,8 @@ export interface OptionsElements {
 
 @Component({
   selector: 'inline-edit',
-  styleUrls: ['inline-edit.component.scss'],
-  template: `
-    <form (ngSubmit)="onSubmit()">
-      <div class="mat-subheading-2">Edit a bet</div>
-      
-      <mat-form-field>
-        <input matInput type="number" name="bet" [(ngModel)]="bet">        
-      </mat-form-field>
-
-      <div class="actions">
-        <button mat-button type="button" color="primary" (click)="onCancel()">CANCEL</button>
-        <button mat-button type="submit" color="primary">SAVE</button>
-      </div>
-    </form>
-  `
+  templateUrl: './inline-edit.component.html',
+  styleUrls: ['./inline-edit.component.scss']
 })
 export class InlineEditComponent {
 
@@ -229,7 +216,7 @@ export class InlineEditComponent {
   }
 }
 
-export class ExampleDataSource extends DataSource<any> {
+export class BettingDataSource extends DataSource<any> {
 
   private dataSubject = new BehaviorSubject<ElmentOfBetting[]>([]);
 
