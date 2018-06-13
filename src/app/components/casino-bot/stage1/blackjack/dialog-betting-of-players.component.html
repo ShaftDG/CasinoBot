@@ -15,9 +15,12 @@
 
         <!-- players Column -->
         <ng-container matColumnDef="player">
-          <th mat-header-cell *matHeaderCellDef> Value </th>
-          <td mat-cell *matCellDef="let element">
-            <mat-checkbox [value]="element.player"
+          <th mat-header-cell *matHeaderCellDef> Players </th>
+          <td mat-cell *matCellDef="let element"> {{element.player}}
+            <mat-checkbox
+
+                          [checked]="element.player"
+
                           [(ngModel)]="element.player"
                           name="element.player"
             ></mat-checkbox>

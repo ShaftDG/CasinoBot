@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Optional, Host } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ElmentOfBetting } from "../../casino-bot.component";
+import { CasinoBot, ElementOfBetting, ElementOfMainTable, OptionsElements } from '../../casino-bot';
 import { SatPopover } from '@ncstate/sat-popover';
 import { filter } from 'rxjs/operators';
-import { DataSource } from '@angular/cdk/collections';
+import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
@@ -68,8 +68,8 @@ export class BlackjackComponent implements OnInit {
   displayedColumnsBettingOfplayers = ['item', 'player', 'bet'];
   pageSizeBetting = 3;
   @Input() dataSourceBettingOfPlayers;
-  @Output() dataSourceBettingOfPlayersChange = new EventEmitter<ElmentOfBetting>();
-  onDataSourceBettingOfPlayersChange(model: ElmentOfBetting){
+  @Output() dataSourceBettingOfPlayersChange = new EventEmitter<ElementOfBetting>();
+  onDataSourceBettingOfPlayersChange(model: ElementOfBetting){
     this.dataSourceBettingOfPlayers = model;
     this.dataSourceBettingOfPlayersChange.emit(model);
   }
@@ -137,6 +137,8 @@ export class DialogOptionsBlackjack {
   styleUrls: ['./dialog-betting-of-players.component.css']
 })
 export class DialogBettingOfPlayers {
+  selection = new SelectionModel<boolean>(true, []);
+
   constructor(
     public dialogRef1: MatDialogRef<DialogBettingOfPlayers>,
     @Inject(MAT_DIALOG_DATA) public dataBetting: any) { }
@@ -146,7 +148,7 @@ export class DialogBettingOfPlayers {
     this.dt = new BettingDataSource(this.dataBetting.dataSource.data);
   }
 
-  update(el: ElmentOfBetting, bet: number) {
+  update(el: ElementOfBetting, bet: number) {
     if (bet == null) { return; }
     // copy and mutate
     const copy = this.dt.data().slice()
@@ -158,22 +160,6 @@ export class DialogBettingOfPlayers {
    }*/
 
 }
-
-export interface ElmentOfBetting {
-  item: string;
-  player: boolean;
-  bet: number;
-}
-
-export interface OptionsElements {
-  amountOfReplenishment:number;
-  maxCountGamesStage1:number;
-  maxWinGamesStage1:number;
-  maxBalanceStage1:number;
-  maxWinGamesStage2:number;
-  maxBalanceStage2:number;
-}
-
 
 @Component({
   selector: 'inline-edit',
@@ -218,7 +204,7 @@ export class InlineEditComponent {
 
 export class BettingDataSource extends DataSource<any> {
 
-  private dataSubject = new BehaviorSubject<ElmentOfBetting[]>([]);
+  private dataSubject = new BehaviorSubject<ElementOfBetting[]>([]);
 
   data() {
     return this.dataSubject.value;
@@ -234,7 +220,7 @@ export class BettingDataSource extends DataSource<any> {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<ElmentOfBetting[]> {
+  connect(): Observable<ElementOfBetting[]> {
     return this.dataSubject;
   }
 

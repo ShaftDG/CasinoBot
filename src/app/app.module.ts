@@ -3,10 +3,12 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+//import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
+
+import { HttpClientModule }   from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -47,7 +49,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
+   // NoopAnimationsModule,
+
+    HttpClientModule,
 
     FormsModule, ReactiveFormsModule,
     LayoutModule,
@@ -75,4 +79,12 @@ const routes: Routes = [
 })
 export class AppModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {
+  // Ensure Angular destroys itself on hot reloads.
+  if (window['ngRef']) {
+    window['ngRef'].destroy();
+  }
+  window['ngRef'] = ref;
+
+  // Otherise, log the boot error
+}).catch(err => console.error(err));

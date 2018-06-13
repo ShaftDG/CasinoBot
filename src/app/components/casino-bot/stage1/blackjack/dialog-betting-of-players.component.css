@@ -13,4 +13,5 @@ table {
 }
 .mat-cell.mat-column-bet {
   cursor: pointer;
+  overflow: visible;
 }

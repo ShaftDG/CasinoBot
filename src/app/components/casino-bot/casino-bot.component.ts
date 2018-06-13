@@ -1,60 +1,76 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material";
+import { CasinoBot, ElementOfBetting, ElementOfMainTable } from './casino-bot';
+import { CasinoBotService } from './casino-bot.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-casino-bot',
   templateUrl: './casino-bot.component.html',
-  styleUrls: ['./casino-bot.component.css']
+  styleUrls: ['./casino-bot.component.css'],
+  providers: [ CasinoBotService ]
 })
 export class CasinoBotComponent implements OnInit {
   title = 'CasinoBot 1.3.1';
 
+  casinoBot: CasinoBot;
+  casinoBots: Array<CasinoBot>;
+
   //variables General Stage1
-  selectedValueGameGeneralStage1: string;
-  gamesGeneralStage1 = [
-    {value: 'blackjack-0', viewValue: 'Blackjack'},
-    {value: 'roulette-1', viewValue: 'Roulette'},
-    {value: 'slot-2', viewValue: 'Slot'}
-  ];
-  selectedValueProviderGeneralStage1: string;
-  providersGeneralStage1 = [
-    {value: 'parimatch9087-0', viewValue: 'parimatch9087'},
-    {value: 'parimatch9086-1', viewValue: 'parimatch9086'},
-    {value: 'parimatch4125-2', viewValue: 'parimatch4125'},
-    {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
-  ];
+  selectedValueGameGeneralStage1: any;
+  gamesGeneralStage1: any;
+  selectedValueProviderGeneralStage1: any;
+  providersGeneralStage1: any;
 
   //variables Blackjack Stage1
-  selectedValueProviderBlackjackStage1: string;
-  providersBlackjackStage1 = [
-    {value: 'parimatch9087-0', viewValue: 'parimatch9087'},
-    {value: 'parimatch9086-1', viewValue: 'parimatch9086'},
-    {value: 'parimatch4125-2', viewValue: 'parimatch4125'},
-    {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
-  ];
-  dataSource = new MatTableDataSource<ElmentOfMainTable>(ELEMENT_DATA_MAIN);
-  isMoneyGame:boolean = false;
-  isAutoPlay:boolean = false;
-  isStage1:boolean = false;
-  isForceStage2:boolean = false;
+  selectedValueProviderBlackjackStage1: any;
+  providersBlackjackStage1: any;
+  dataSource: any;
+  isMoneyGame: any;
+  isAutoPlay: any;
+  isStage1: any;
+  isForceStage2: any;
 
   //Options
-  dataOptions: OptionsElements = {
-    amountOfReplenishment: 2.0,
-    maxCountGamesStage1: 2.0,
-    maxWinGamesStage1: 3.0,
-    maxBalanceStage1: 4.0,
-    maxWinGamesStage2: 2.0,
-    maxBalanceStage2: 1.0,
-  };
+  dataOptions: any;
   //betting of players
-  dataSourceBettingOfPlayers = new MatTableDataSource<ElmentOfBetting>(ELEMENT_DATA_BETTING);
+  dataSourceBettingOfPlayers: any;
 
-  constructor() {
+  constructor(private serv: CasinoBotService) {
+    //this.casinoBots = new Array<CasinoBot>();
   }
 
   ngOnInit() {
+   // this.loadUsers();
+    this.casinoBot = this.serv.getUsers();
+    //variables General Stage1
+    this.selectedValueGameGeneralStage1 = this.casinoBot.stage1.selectedValueGameGeneralStage1;
+    this.gamesGeneralStage1 = this.casinoBot.stage1.gamesGeneralStage1;
+    this.selectedValueProviderGeneralStage1 = this.casinoBot.stage1.selectedValueProviderGeneralStage1;
+    this.providersGeneralStage1 = this.casinoBot.stage1.providersGeneralStage1;
+
+    //variables Blackjack Stage1
+    this.selectedValueProviderBlackjackStage1 = this.casinoBot.stage1.selectedValueProviderBlackjackStage1
+    this.providersBlackjackStage1 = this.casinoBot.stage1.providersBlackjackStage1;
+    this.dataSource = new MatTableDataSource<ElementOfMainTable>(this.casinoBot.stage1.ELEMENT_DATA_MAIN);
+    this.isMoneyGame = this.casinoBot.stage1.isMoneyGame;
+    this.isAutoPlay = this.casinoBot.stage1.isAutoPlay;
+    this.isStage1 = this.casinoBot.stage1.isStage1;
+    this.isForceStage2 = this.casinoBot.stage1.isForceStage2;
+
+    //Options
+    this.dataOptions = this.casinoBot.stage1.dataOptions;
+    //betting of players
+    this.dataSourceBettingOfPlayers = new MatTableDataSource<ElementOfBetting>(this.casinoBot.stage1.ELEMENT_DATA_BETTING);
   }
+
+  //загрузка бота
+/*   private loadUsers() {
+    this.serv.getUsers().subscribe((data: CasinoBot[]) => {
+      this.casinoBots = data;
+    });
+  }*/
+
   ngOnUpdate() {
    /* console.log("selectedValueGameGeneralStage1",this.selectedValueGameGeneralStage1);
     console.log("selectedValueProviderGeneralStage1",this.selectedValueProviderGeneralStage1);
@@ -67,42 +83,4 @@ export class CasinoBotComponent implements OnInit {
     //console.log("dataOptions",this.dataOptions);
     console.log("dataSourceBettingOfPlayers",this.dataSourceBettingOfPlayers.data);
   }
-
-}
-
-export interface ElmentOfMainTable {
-  name: string;
-  value: string;
-}
-
-const ELEMENT_DATA_MAIN: ElmentOfMainTable[] = [
-  {name: '1', value: '5,10,7'},
-  {name: '2', value: '3,8,9'},
-  {name: '3', value: '6,4,5'},
-  {name: '4', value: '2,5,2'},
-  {name: '5', value: '5,3,5'},
-  {name: '6', value: '7,8,8'},
-  {name: '7', value: '9,4,7'},
-  {name: '8', value: '5,9,4'}
-];
-
-export interface ElmentOfBetting {
-  item: string;
-  player: boolean;
-  bet: number;
-}
-
-const ELEMENT_DATA_BETTING: ElmentOfBetting[] = [
-  {item: '1', player: true, bet: 1},
-  {item: '2', player: true, bet: 1},
-  {item: '3', player: true, bet: 1}
-];
-
-export interface OptionsElements {
-  amountOfReplenishment:number;
-  maxCountGamesStage1:number;
-  maxWinGamesStage1:number;
-  maxBalanceStage1:number;
-  maxWinGamesStage2:number;
-  maxBalanceStage2:number;
 }
