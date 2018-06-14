@@ -50,7 +50,6 @@
         <div class="container-checkbox">
           <mat-checkbox [(ngModel)]="isMoneyGameRoulette"
                         name="isMoneyGameRoulette"
-                        (change)="isMoneyGameRoulette = !isMoneyGameRoulette"
                         (ngModelChange)="onMoneyGameRouletteChange($event)"
           >Money game
           </mat-checkbox>
@@ -58,7 +57,6 @@
         <div class="container-checkbox">
           <mat-checkbox [(ngModel)]="isStage1Roulette"
                         name="isStage1Roulette"
-                        (change)="isStage1Roulette = !isStage1Roulette"
                         (ngModelChange)="onStage1RouletteChange($event)"
           >Stage 1
           </mat-checkbox>
@@ -66,7 +64,6 @@
         <div class="container-checkbox">
           <mat-checkbox [(ngModel)]="isForceStage2Roulette"
                         name="isForceStage2Roulette"
-                        (change)="isForceStage2Roulette = !isForceStage2Roulette"
                         (ngModelChange)="onForceStage2RouletteChange($event)"
           >Force stage 2
           </mat-checkbox>

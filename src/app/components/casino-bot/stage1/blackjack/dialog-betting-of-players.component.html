@@ -18,11 +18,8 @@
           <th mat-header-cell *matHeaderCellDef> Players </th>
           <td mat-cell *matCellDef="let element"> {{element.player}}
             <mat-checkbox
-
-                          [checked]="element.player"
-
-                          [(ngModel)]="element.player"
-                          name="element.player"
+              [checked]="element.player"
+              (change)="element.player = !element.player"
             ></mat-checkbox>
           </td>
         </ng-container>

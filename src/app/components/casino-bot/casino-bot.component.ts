@@ -97,12 +97,16 @@ export class CasinoBotComponent implements OnInit {
    /* console.log("selectedValueGameGeneralStage1",this.selectedValueGameGeneralStage1);
     console.log("selectedValueProviderGeneralStage1",this.selectedValueProviderGeneralStage1);
     console.log("selectedValueProviderBlackjackStage1",this.selectedValueProviderBlackjackStage1);
-    console.log("isMoneyGame",this.isMoneyGame);
-    console.log("isAutoPlay",this.isAutoPlay);
-    console.log("isStage1",this.isStage1);
-    console.log("isForceStage2",this.isForceStage2);*/
+    */
+  /*  console.log("isMoneyGameBlackjack",this.isMoneyGameBlackjack);
+    console.log("isAutoPlayBlackjack",this.isAutoPlayBlackjack);
+    console.log("isStage1Blackjack",this.isStage1Blackjack);
+    console.log("isForceStage2Blackjack",this.isForceStage2Blackjack);*/
 
-    //console.log("dataOptions",this.dataOptions);
+    /*console.log("isMoneyGameRoulette",this.isMoneyGameRoulette);
+    console.log("isStage1Roulette",this.isStage1Roulette);
+    console.log("isForceStage2Roulette",this.isForceStage2Roulette);*/
+
     console.log("dataSourceBettingOfPlayers",this.dataSourceBettingOfPlayers.data);
   }
 }

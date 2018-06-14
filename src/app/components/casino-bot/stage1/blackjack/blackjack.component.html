@@ -47,15 +47,13 @@
           <div class="container-checkbox">
               <mat-checkbox [(ngModel)]="isMoneyGameBlackjack"
                             name="isMoneyGameBlackjack"
-                            (change)="isMoneyGameBlackjack = !isMoneyGameBlackjack"
                             (ngModelChange)="onMoneyGameBlackjackChange($event)"
-              >Money game
+              >Money game {{isMoneyGameBlackjack}}
               </mat-checkbox>
           </div>
           <div class="container-checkbox">
               <mat-checkbox [(ngModel)]="isAutoPlayBlackjack"
                             name="isAutoPlayBlackjack"
-                            (change)="isAutoPlayBlackjack = !isAutoPlayBlackjack"
                             (ngModelChange)="onAutoPlayBlackjackChange($event)"
               >AutoPlay
               </mat-checkbox>
@@ -63,7 +61,6 @@
           <div class="container-checkbox">
               <mat-checkbox [(ngModel)]="isStage1Blackjack"
                             name="isStage1Blackjack"
-                            (change)="isStage1Blackjack = !isStage1Blackjack"
                             (ngModelChange)="onStage1BlackjackChange($event)"
               >Stage 1
               </mat-checkbox>
@@ -71,7 +68,6 @@
           <div class="container-checkbox">
               <mat-checkbox [(ngModel)]="isForceStage2Blackjack"
                             name="isForceStage2Blackjack"
-                            (change)="isForceStage2Blackjack = !isForceStage2Blackjack"
                             (ngModelChange)="onForceStage2BlackjackChange($event)"
               >Force stage 2
               </mat-checkbox>

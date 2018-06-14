@@ -118,7 +118,6 @@ export class BlackjackComponent implements OnInit {
   styleUrls: ['./dialog-options-blackjack.component.css']
 })
 export class DialogOptionsBlackjack {
-
   constructor(
     public dialogRef: MatDialogRef<DialogOptionsBlackjack>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -135,7 +134,7 @@ export class DialogOptionsBlackjack {
   styleUrls: ['./dialog-betting-of-players.component.css']
 })
 export class DialogBettingOfPlayers {
-  selection = new SelectionModel<boolean>(true, []);
+  selection = new SelectionModel<ElementOfBetting>(true, []);
 
   constructor(
     public dialogRef1: MatDialogRef<DialogBettingOfPlayers>,
