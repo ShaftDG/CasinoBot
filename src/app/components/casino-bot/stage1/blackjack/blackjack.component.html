@@ -2,7 +2,7 @@
   <div class="container">
       <mat-card class="card" >
         <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
+            <table mat-table [dataSource]="dataSourceBlackjack">
 
               <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
@@ -45,34 +45,34 @@
             <button mat-raised-button class="button" (click)="openDialogBettingOfPlayers()">Betting of players</button>
           </div>
           <div class="container-checkbox">
-              <mat-checkbox [(ngModel)]="isMoneyGame"
-                            name="isMoneyGame"
-                            (change)="isMoneyGame = !isMoneyGame"
-                            (ngModelChange)="onMoneyGameChange($event)"
+              <mat-checkbox [(ngModel)]="isMoneyGameBlackjack"
+                            name="isMoneyGameBlackjack"
+                            (change)="isMoneyGameBlackjack = !isMoneyGameBlackjack"
+                            (ngModelChange)="onMoneyGameBlackjackChange($event)"
               >Money game
               </mat-checkbox>
           </div>
           <div class="container-checkbox">
-              <mat-checkbox [(ngModel)]="isAutoPlay"
-                            name="isAutoPlay"
-                            (change)="isAutoPlay = !isAutoPlay"
-                            (ngModelChange)="onAutoPlayChange($event)"
+              <mat-checkbox [(ngModel)]="isAutoPlayBlackjack"
+                            name="isAutoPlayBlackjack"
+                            (change)="isAutoPlayBlackjack = !isAutoPlayBlackjack"
+                            (ngModelChange)="onAutoPlayBlackjackChange($event)"
               >AutoPlay
               </mat-checkbox>
           </div>
           <div class="container-checkbox">
-              <mat-checkbox [(ngModel)]="isStage1"
-                            name="isStage1"
-                            (change)="isStage1 = !isStage1"
-                            (ngModelChange)="onStage1Change($event)"
+              <mat-checkbox [(ngModel)]="isStage1Blackjack"
+                            name="isStage1Blackjack"
+                            (change)="isStage1Blackjack = !isStage1Blackjack"
+                            (ngModelChange)="onStage1BlackjackChange($event)"
               >Stage 1
               </mat-checkbox>
           </div>
           <div class="container-checkbox">
-              <mat-checkbox [(ngModel)]="isForceStage2"
-                            name="isForceStage2"
-                            (change)="isForceStage2 = !isForceStage2"
-                            (ngModelChange)="onForceStage2Change($event)"
+              <mat-checkbox [(ngModel)]="isForceStage2Blackjack"
+                            name="isForceStage2Blackjack"
+                            (change)="isForceStage2Blackjack = !isForceStage2Blackjack"
+                            (ngModelChange)="onForceStage2BlackjackChange($event)"
               >Force stage 2
               </mat-checkbox>
           </div>

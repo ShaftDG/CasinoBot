@@ -30,6 +30,7 @@ import { AboutComponent } from './about/about.component';
 import { CasinoBotComponent } from './components/casino-bot/casino-bot.component';
 import { BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent } from './components/casino-bot/stage1/blackjack/blackjack.component';
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
+import { RouletteComponent, DialogOptionsRoulette } from './components/casino-bot/stage1/roulette/roulette.component';
 
 const routes: Routes = [
   {path: 'about', component: AboutComponent},
@@ -37,14 +38,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  entryComponents: [BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers],
+  entryComponents: [
+    BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers,
+    RouletteComponent, DialogOptionsRoulette
+  ],
   declarations: [
     AppComponent,
     MainComponent,
     AboutComponent,
     CasinoBotComponent,
     BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent,
-    GeneralComponent
+    GeneralComponent,
+    RouletteComponent, DialogOptionsRoulette
   ],
   imports: [
     BrowserModule,

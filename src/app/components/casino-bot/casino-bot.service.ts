@@ -3,11 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   CasinoBot,
   ElementOfBetting,
-  ElementOfMainTable,
+  ElementOfMainTable, ElementRoulette,
   GamesGeneralStage1,
-  OptionsElements,
+  OptionsElementsBlackjack, OptionsElementsRoulette,
   ProvidersBlackjackStage1,
-  ProvidersGeneralStage1,
+  ProvidersGeneralStage1, SetNumbersRouletteStage1, VariantRoulette,
 } from './casino-bot';
 import { Observable } from 'rxjs';
 import {MatTableDataSource} from "@angular/material";
@@ -21,19 +21,38 @@ export class CasinoBotService{
   getUsers(){
     return {
               stage1: {
-                selectedValueGameGeneralStage1: selectedValueGameGeneralStage1,
-                gamesGeneralStage1: gamesGeneralStage1,
-                selectedValueProviderGeneralStage1: selectedValueProviderGeneralStage1,
-                providersGeneralStage1: providersGeneralStage1,
-                selectedValueProviderBlackjackStage1: selectedValueProviderBlackjackStage1,
-                providersBlackjackStage1: providersBlackjackStage1,
-                isMoneyGame: isMoneyGame,
-                isAutoPlay: isAutoPlay,
-                isStage1: isStage1,
-                isForceStage2: isForceStage2,
-                dataOptions: dataOptions,
-                ELEMENT_DATA_MAIN: ELEMENT_DATA_MAIN,
-                ELEMENT_DATA_BETTING: ELEMENT_DATA_BETTING
+                general: {
+                  selectedValueGameGeneralStage1: selectedValueGameGeneralStage1,
+                  gamesGeneralStage1: gamesGeneralStage1,
+                  selectedValueProviderGeneralStage1: selectedValueProviderGeneralStage1,
+                  providersGeneralStage1: providersGeneralStage1,
+                },
+                blackjack: {
+                  selectedValueProviderBlackjackStage1: selectedValueProviderBlackjackStage1,
+                  providersBlackjackStage1: providersBlackjackStage1,
+                  isMoneyGameBlackjack: isMoneyGameBlackjack,
+                  isAutoPlayBlackjack: isAutoPlayBlackjack,
+                  isStage1Blackjack: isStage1Blackjack,
+                  isForceStage2Blackjack: isForceStage2Blackjack,
+                  dataOptionsBlackjack: dataOptionsBlackjack,
+                  ELEMENT_DATA_MAIN: ELEMENT_DATA_MAIN,
+                  ELEMENT_DATA_BETTING: ELEMENT_DATA_BETTING
+                },
+                roulette: {
+                  selectedSetNumbersRouletteStage1: selectedSetNumbersRouletteStage1,
+                  setNumbersRouletteStage1: setNumbersRouletteStage1,
+                  numberSet: numberSet,
+                  betSet: betSet,
+                  betNumbers: betNumbers,
+                  selectedVariantRouletteRouletteStage1: selectedVariantRouletteRouletteStage1,
+                  variantRoulette: variantRoulette,
+                  isMoneyGameRoulette: isMoneyGameRoulette,
+                  isStage1Roulette: isStage1Roulette,
+                  isForceStage2Roulette: isForceStage2Roulette,
+                  dataOptionsRoulette: dataOptionsRoulette,
+                  ELEMENT_DATA_ROULETTE: ELEMENT_DATA_ROULETTE,
+                },
+                slots: {}
               }
           }
           // return this.http.get(this.url);
@@ -76,13 +95,12 @@ const providersBlackjackStage1: ProvidersBlackjackStage1[] = [
   {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
 ];
 
-const isMoneyGame: boolean = false;
-const isAutoPlay: boolean = false;
-const isStage1: boolean = false;
-const isForceStage2 :boolean = false;
+const isMoneyGameBlackjack: boolean = false;
+const isAutoPlayBlackjack: boolean = false;
+const isStage1Blackjack: boolean = false;
+const isForceStage2Blackjack: boolean = false;
 
-//Options
-const dataOptions: OptionsElements = {
+const dataOptionsBlackjack: OptionsElementsBlackjack = {
   amountOfReplenishment: 2.0,
   maxCountGamesStage1: 2.0,
   maxWinGamesStage1: 3.0,
@@ -107,3 +125,41 @@ const ELEMENT_DATA_BETTING: ElementOfBetting[] = [
   {item: '2', player: false, bet: 1},
   {item: '3', player: false, bet: 1}
 ];
+
+//variables Roulette Stage1
+const selectedSetNumbersRouletteStage1: string = 'split';
+const setNumbersRouletteStage1: SetNumbersRouletteStage1[] = [
+  {value: 'split-0', viewValue: 'split'},
+  {value: 'fourOfKind-1', viewValue: 'fourOfKind'},
+  {value: 'sixLine-2', viewValue: 'sixLine'},
+  {value: 'red/black-3', viewValue: 'red/black'},
+  {value: 'red-4', viewValue: 'red'},
+  {value: 'black-5', viewValue: 'black'},
+  {value: 'even-6', viewValue: 'even'},
+  {value: 'odd-7', viewValue: 'odd'},
+  {value: 'even/odd-8', viewValue: 'even/odd'},
+  {value: '1/18-9', viewValue: '1/18'},
+  {value: '19/36-10', viewValue: '19/36'},
+  {value: '1/36-11', viewValue: '1/36'}
+];
+const  numberSet: number = 1;
+const  betSet: number = 1;
+const  betNumbers: number = 1;
+
+const selectedVariantRouletteRouletteStage1: string = 'roulette163';
+const variantRoulette: VariantRoulette[] = [
+  {value: 'roulette163-0', viewValue: 'roulette163'},
+  {value: 'roulette165-1', viewValue: 'roulette165'}
+];
+const isMoneyGameRoulette: boolean = false;
+const isStage1Roulette: boolean = true;
+const isForceStage2Roulette: boolean = false;
+const dataOptionsRoulette: OptionsElementsRoulette = {
+  amountOfReplenishment: 10.0,
+  maxCountGamesStage0: 10.0,
+  maxWinGamesStage0: 10.0,
+  maxBalanceStage0: 10.0,
+  maxWinGamesStage1: 10.0,
+  maxBalanceStage1: 10.0,
+};
+const ELEMENT_DATA_ROULETTE: ElementRoulette[] = [];

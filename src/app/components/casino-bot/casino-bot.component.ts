@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material";
-import { CasinoBot, ElementOfBetting, ElementOfMainTable } from './casino-bot';
+import {CasinoBot, ElementOfBetting, ElementOfMainTable, ElementRoulette} from './casino-bot';
 import { CasinoBotService } from './casino-bot.service';
 import { Observable } from 'rxjs';
 
@@ -25,16 +25,27 @@ export class CasinoBotComponent implements OnInit {
   //variables Blackjack Stage1
   selectedValueProviderBlackjackStage1: any;
   providersBlackjackStage1: any;
-  dataSource: any;
-  isMoneyGame: any;
-  isAutoPlay: any;
-  isStage1: any;
-  isForceStage2: any;
-
-  //Options
-  dataOptions: any;
-  //betting of players
+  dataSourceBlackjack: any;
+  isMoneyGameBlackjack: any;
+  isAutoPlayBlackjack: any;
+  isStage1Blackjack: any;
+  isForceStage2Blackjack: any;
+  dataOptionsBlackjack: any;
   dataSourceBettingOfPlayers: any;
+
+  //variables Roulette Stage1
+  selectedSetNumbersRouletteStage1: any;
+  setNumbersRouletteStage1: any;
+  numberSet: any;
+  betSet: any;
+  betNumbers: any;
+  selectedVariantRouletteRouletteStage1: any;
+  variantRoulette: any;
+  isMoneyGameRoulette: any;
+  isStage1Roulette: any;
+  isForceStage2Roulette: any;
+  dataOptionsRoulette: any;
+  dataSourceRoulette: any;
 
   constructor(private serv: CasinoBotService) {
     //this.casinoBots = new Array<CasinoBot>();
@@ -44,24 +55,35 @@ export class CasinoBotComponent implements OnInit {
    // this.loadUsers();
     this.casinoBot = this.serv.getUsers();
     //variables General Stage1
-    this.selectedValueGameGeneralStage1 = this.casinoBot.stage1.selectedValueGameGeneralStage1;
-    this.gamesGeneralStage1 = this.casinoBot.stage1.gamesGeneralStage1;
-    this.selectedValueProviderGeneralStage1 = this.casinoBot.stage1.selectedValueProviderGeneralStage1;
-    this.providersGeneralStage1 = this.casinoBot.stage1.providersGeneralStage1;
+    this.selectedValueGameGeneralStage1 = this.casinoBot.stage1.general.selectedValueGameGeneralStage1;
+    this.gamesGeneralStage1 = this.casinoBot.stage1.general.gamesGeneralStage1;
+    this.selectedValueProviderGeneralStage1 = this.casinoBot.stage1.general.selectedValueProviderGeneralStage1;
+    this.providersGeneralStage1 = this.casinoBot.stage1.general.providersGeneralStage1;
 
     //variables Blackjack Stage1
-    this.selectedValueProviderBlackjackStage1 = this.casinoBot.stage1.selectedValueProviderBlackjackStage1
-    this.providersBlackjackStage1 = this.casinoBot.stage1.providersBlackjackStage1;
-    this.dataSource = new MatTableDataSource<ElementOfMainTable>(this.casinoBot.stage1.ELEMENT_DATA_MAIN);
-    this.isMoneyGame = this.casinoBot.stage1.isMoneyGame;
-    this.isAutoPlay = this.casinoBot.stage1.isAutoPlay;
-    this.isStage1 = this.casinoBot.stage1.isStage1;
-    this.isForceStage2 = this.casinoBot.stage1.isForceStage2;
+    this.selectedValueProviderBlackjackStage1 = this.casinoBot.stage1.blackjack.selectedValueProviderBlackjackStage1
+    this.providersBlackjackStage1 = this.casinoBot.stage1.blackjack.providersBlackjackStage1;
+    this.dataSourceBlackjack = new MatTableDataSource<ElementOfMainTable>(this.casinoBot.stage1.blackjack.ELEMENT_DATA_MAIN);
+    this.isMoneyGameBlackjack = this.casinoBot.stage1.blackjack.isMoneyGameBlackjack;
+    this.isAutoPlayBlackjack = this.casinoBot.stage1.blackjack.isAutoPlayBlackjack;
+    this.isStage1Blackjack = this.casinoBot.stage1.blackjack.isStage1Blackjack;
+    this.isForceStage2Blackjack = this.casinoBot.stage1.blackjack.isForceStage2Blackjack;
+    this.dataOptionsBlackjack = this.casinoBot.stage1.blackjack.dataOptionsBlackjack;
+    this.dataSourceBettingOfPlayers = new MatTableDataSource<ElementOfBetting>(this.casinoBot.stage1.blackjack.ELEMENT_DATA_BETTING);
 
-    //Options
-    this.dataOptions = this.casinoBot.stage1.dataOptions;
-    //betting of players
-    this.dataSourceBettingOfPlayers = new MatTableDataSource<ElementOfBetting>(this.casinoBot.stage1.ELEMENT_DATA_BETTING);
+    //variables Roulette Stage1
+    this.selectedSetNumbersRouletteStage1 = this.casinoBot.stage1.roulette.selectedSetNumbersRouletteStage1;
+    this.setNumbersRouletteStage1 = this.casinoBot.stage1.roulette.setNumbersRouletteStage1;
+    this.numberSet = this.casinoBot.stage1.roulette.numberSet;
+    this.betSet = this.casinoBot.stage1.roulette.betSet;
+    this.betNumbers = this.casinoBot.stage1.roulette.betNumbers;
+    this.selectedVariantRouletteRouletteStage1 = this.casinoBot.stage1.roulette.selectedVariantRouletteRouletteStage1;
+    this.variantRoulette = this.casinoBot.stage1.roulette.variantRoulette;
+    this.isMoneyGameRoulette = this.casinoBot.stage1.roulette.isMoneyGameRoulette;
+    this.isStage1Roulette = this.casinoBot.stage1.roulette.isStage1Roulette;
+    this.isForceStage2Roulette = this.casinoBot.stage1.roulette.isForceStage2Roulette;
+    this.dataOptionsRoulette = this.casinoBot.stage1.roulette.dataOptionsRoulette;
+    this.dataSourceRoulette = new MatTableDataSource<ElementRoulette>(this.casinoBot.stage1.roulette.ELEMENT_DATA_ROULETTE);
   }
 
   //загрузка бота

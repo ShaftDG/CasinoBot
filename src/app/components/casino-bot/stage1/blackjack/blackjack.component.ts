@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Optional, Host } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CasinoBot, ElementOfBetting, ElementOfMainTable, OptionsElements } from '../../casino-bot';
+import { CasinoBot, ElementOfBetting, ElementOfMainTable, OptionsElementsBlackjack } from '../../casino-bot';
 import { SatPopover } from '@ncstate/sat-popover';
 import { filter } from 'rxjs/operators';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
@@ -16,29 +16,29 @@ import { BehaviorSubject } from 'rxjs';
 export class BlackjackComponent implements OnInit {
 
  //checkboxes
-  @Input() isMoneyGame:boolean;
-  @Output() isMoneyGameChange = new EventEmitter<boolean>();
-  onMoneyGameChange(model: boolean){
-    this.isMoneyGame = model;
-    this.isMoneyGameChange.emit(model);
+  @Input() isMoneyGameBlackjack:boolean;
+  @Output() isMoneyGameBlackjackChange = new EventEmitter<boolean>();
+  onMoneyGameBlackjackChange(model: boolean){
+    this.isMoneyGameBlackjack = model;
+    this.isMoneyGameBlackjackChange.emit(model);
   }
-  @Input() isAutoPlay:boolean;
-  @Output() isAutoPlayChange = new EventEmitter<boolean>();
-  onAutoPlayChange(model: boolean){
-    this.isAutoPlay = model;
-    this.isAutoPlayChange.emit(model);
+  @Input() isAutoPlayBlackjack:boolean;
+  @Output() isAutoPlayBlackjackChange = new EventEmitter<boolean>();
+  onAutoPlayBlackjackChange(model: boolean){
+    this.isAutoPlayBlackjack = model;
+    this.isAutoPlayBlackjackChange.emit(model);
   }
-  @Input() isStage1:boolean;
-  @Output() isStage1Change = new EventEmitter<boolean>();
-  onStage1Change(model: boolean){
-    this.isStage1 = model;
-    this.isStage1Change.emit(model);
+  @Input() isStage1Blackjack:boolean;
+  @Output() isStage1BlackjackChange = new EventEmitter<boolean>();
+  onStage1BlackjackChange(model: boolean){
+    this.isStage1Blackjack = model;
+    this.isStage1BlackjackChange.emit(model);
   }
-  @Input() isForceStage2:boolean;
-  @Output() isForceStage2Change = new EventEmitter<boolean>();
-  onForceStage2Change(model: boolean){
-    this.isForceStage2 = model;
-    this.isForceStage2Change.emit(model);
+  @Input() isForceStage2Blackjack:boolean;
+  @Output() isForceStage2BlackjackChange = new EventEmitter<boolean>();
+  onForceStage2BlackjackChange(model: boolean){
+    this.isForceStage2Blackjack = model;
+    this.isForceStage2BlackjackChange.emit(model);
   }
 
   //select
@@ -53,15 +53,15 @@ export class BlackjackComponent implements OnInit {
   //table
   displayedColumns = ['name', 'value'];
   pageSize = 5;
-  @Input() dataSource;
+  @Input() dataSourceBlackjack;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   //options
-  @Input() dataOptions: OptionsElements;
-  @Output() dataOptionsChange = new EventEmitter<OptionsElements>();
-  onDataOptionsChange(model: OptionsElements){
-    this.dataOptions = model;
-    this.dataOptionsChange.emit(model);
+  @Input() dataOptionsBlackjack: OptionsElementsBlackjack;
+  @Output() dataOptionsBlackjackChange = new EventEmitter<OptionsElementsBlackjack>();
+  onDataOptionsBlackjackChange(model: OptionsElementsBlackjack){
+    this.dataOptionsBlackjack = model;
+    this.dataOptionsBlackjackChange.emit(model);
   }
 
   //table
@@ -79,14 +79,14 @@ export class BlackjackComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogOptionsBlackjack, {
       width: '515px',
-      data: this.dataOptions,
+      data: this.dataOptionsBlackjack,
       disableClose: true,
       closeOnNavigation: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.onDataOptionsChange(result);
+      this.onDataOptionsBlackjackChange(result);
     });
   }
 
@@ -107,7 +107,7 @@ export class BlackjackComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.dataSourceBlackjack.paginator = this.paginator;
   }
 
 }
@@ -118,8 +118,6 @@ export class BlackjackComponent implements OnInit {
   styleUrls: ['./dialog-options-blackjack.component.css']
 })
 export class DialogOptionsBlackjack {
-
-  bet = '';
 
   constructor(
     public dialogRef: MatDialogRef<DialogOptionsBlackjack>,
