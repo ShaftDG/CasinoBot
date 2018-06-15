@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-blackjack',
@@ -122,6 +123,17 @@ export class DialogOptionsBlackjack {
     public dialogRef: MatDialogRef<DialogOptionsBlackjack>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  formControl = new FormControl('', [
+    Validators.required
+    // Validators.email,
+  ]);
+
+  getErrorMessage() {
+    return this.formControl.hasError('required') ? 'Required field' :
+      this.formControl.hasError('email') ? 'Not a valid email' :
+        '';
+  }
+
  /* onNoClick(): void {
     this.dialogRef.close();
   }*/
@@ -177,6 +189,17 @@ export class InlineEditComponent {
   bet = '';
 
   constructor(@Optional() @Host() public popover: SatPopover) { }
+
+  formControl = new FormControl('', [
+    Validators.required
+    // Validators.email,
+  ]);
+
+  getErrorMessage() {
+    return this.formControl.hasError('required') ? 'Required field' :
+      this.formControl.hasError('email') ? 'Not a valid email' :
+        '';
+  }
 
   ngOnInit() {
     // subscribe to cancellations and reset form value

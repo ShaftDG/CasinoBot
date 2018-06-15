@@ -1,0 +1,67 @@
+
+  <h3 mat-dialog-title>Add new item</h3>
+
+  <form #formControl="ngForm">
+    <div>
+      <mat-form-field>
+        <input matInput
+               #input
+               type="number"
+               placeholder="Choose number"
+               [(ngModel)]="data.dataElementRoulette.setNumbers"
+               name="setNumbers"
+               [disabled]="!disableSelect.value"
+               required >
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>Settings
+      <mat-slide-toggle
+        [formControl]="disableSelect">
+      </mat-slide-toggle>
+      Numbers
+    </div>
+    <div>
+      <mat-form-field class="select">
+        <mat-select placeholder="Choose settting"
+                    [(ngModel)]="data.dataElementRoulette.setNumbers"
+                    name="variant"
+                    [disabled]="disableSelect.value"
+                    required >
+          <mat-option *ngFor="let variant of data.selectValue" [value]="variant.viewValue">
+            {{variant.viewValue}}
+          </mat-option>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input matInput
+               #input
+               type="number"
+               placeholder="Bets"
+               [(ngModel)]="data.dataElementRoulette.bets"
+               name="bets"
+               required >
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+        <mat-checkbox
+          [checked]="data.dataElementRoulette.sessionBet"
+          (change)="data.dataElementRoulette.sessionBet = !data.dataElementRoulette.sessionBet"
+        >Session bet</mat-checkbox>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button
+              (click)="onNoClick()"
+              tabindex="-1">Cancel</button>
+      <button mat-button
+              [disabled]="!formControl.valid"
+              [mat-dialog-close]="data">Save</button>
+    </div>
+  </form>

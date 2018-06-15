@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 
 import { RouterModule, Routes } from "@angular/router";
@@ -31,6 +32,8 @@ import { CasinoBotComponent } from './components/casino-bot/casino-bot.component
 import { BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent } from './components/casino-bot/stage1/blackjack/blackjack.component';
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
 import { RouletteComponent, DialogOptionsRoulette } from './components/casino-bot/stage1/roulette/roulette.component';
+import { AddDialogComponent } from './components/casino-bot/stage1/roulette/add-dialog/add-dialog.component';
+import { CasinoBotService } from "./components/casino-bot/casino-bot.service";
 
 const routes: Routes = [
   {path: 'about', component: AboutComponent},
@@ -40,7 +43,7 @@ const routes: Routes = [
 @NgModule({
   entryComponents: [
     BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers,
-    RouletteComponent, DialogOptionsRoulette
+    RouletteComponent, DialogOptionsRoulette, AddDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -49,7 +52,7 @@ const routes: Routes = [
     CasinoBotComponent,
     BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent,
     GeneralComponent,
-    RouletteComponent, DialogOptionsRoulette
+    RouletteComponent, DialogOptionsRoulette, AddDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -75,11 +78,12 @@ const routes: Routes = [
     MatDialogModule,
     MatInputModule,
     MatExpansionModule,
+    MatSlideToggleModule,
     SatPopoverModule,
 
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [ CasinoBotService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

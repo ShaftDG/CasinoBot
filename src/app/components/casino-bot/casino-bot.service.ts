@@ -9,8 +9,7 @@ import {
   ProvidersBlackjackStage1,
   ProvidersGeneralStage1, SetNumbersRouletteStage1, VariantRoulette,
 } from './casino-bot';
-import { Observable } from 'rxjs';
-import {MatTableDataSource} from "@angular/material";
+
 
 @Injectable()
 export class CasinoBotService{
@@ -162,4 +161,14 @@ const dataOptionsRoulette: OptionsElementsRoulette = {
   maxWinGamesStage1: 10.0,
   maxBalanceStage1: 10.0,
 };
-const ELEMENT_DATA_ROULETTE: ElementRoulette[] = [];
+const ELEMENT_DATA_ROULETTE: ElementRoulette[] = [
+  { setNumbers: 'split', bets: 10, sessionBet: true },
+  { setNumbers: 'odd', bets: 100, sessionBet: false },
+  { setNumbers: '19/36', bets: 50, sessionBet: true },
+  { setNumbers: 'even', bets: 10, sessionBet: false },
+  { setNumbers: 'black', bets: 20, sessionBet: true },
+  { setNumbers: 'red/black', bets: 40, sessionBet: true },
+  { setNumbers: 'fourOfKind', bets: 10, sessionBet: false },
+  { setNumbers: 'sixLine', bets: 100, sessionBet: true },
+  { setNumbers: '9', bets: 150, sessionBet: true }
+];

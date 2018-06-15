@@ -1,12 +1,18 @@
-<form (ngSubmit)="onSubmit()">
+<form #formControl="ngForm"
+      (ngSubmit)="onSubmit()">
   <div class="mat-subheading-2">Edit a bet</div>
 
   <mat-form-field>
-    <input matInput type="number" name="bet" [(ngModel)]="bet">
+    <input matInput
+           placeholder="Bet"
+           type="number"
+           name="bet"
+           [(ngModel)]="bet"required >
+    <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
   </mat-form-field>
 
   <div class="actions">
-    <button mat-button type="button" color="primary" (click)="onCancel()">CANCEL</button>
-    <button mat-button type="submit" color="primary">SAVE</button>
+    <button mat-button (click)="onCancel()">CANCEL</button>
+    <button mat-button [disabled]="!formControl.valid" type="submit">SAVE</button>
   </div>
 </form>

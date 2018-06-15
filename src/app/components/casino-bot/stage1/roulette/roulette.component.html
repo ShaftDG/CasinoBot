@@ -9,20 +9,51 @@
 
           <!-- setNumbers Column -->
           <ng-container matColumnDef="setNumbers">
-            <th mat-header-cell *matHeaderCellDef> setNumbers </th>
+            <th mat-header-cell *matHeaderCellDef> Set or numbers </th>
             <td mat-cell *matCellDef="let element"> {{element.setNumbers}} </td>
           </ng-container>
 
           <!-- bets Column -->
           <ng-container matColumnDef="bets">
-            <th mat-header-cell *matHeaderCellDef> bets </th>
+            <th mat-header-cell *matHeaderCellDef> Bets </th>
             <td mat-cell *matCellDef="let element"> {{element.bets}} </td>
           </ng-container>
 
           <!-- sessionBet Column -->
           <ng-container matColumnDef="sessionBet">
-            <th mat-header-cell *matHeaderCellDef> sessionBet </th>
-            <td mat-cell *matCellDef="let element"> {{element.sessionBet}} </td>
+            <th mat-header-cell *matHeaderCellDef> Session bet </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox
+                  [checked]="element.sessionBet"
+                  (change)="element.sessionBet = !element.sessionBet"
+                  (ngModelChange)="onDataSourceRouletteChange($event)"
+                ></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+
+              <button mat-icon-button color="primary" (click)="addItem()">
+                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+              </button>
+
+              <button mat-icon-button color="primary" (click)="deleteAllItems()">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </th>
+
+            <td mat-cell *matCellDef="let row; let i=index;">
+
+              <button mat-icon-button color="accent" (click)="editItem(i, row.setNumbers, row.bets, row.sessionBet)">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="accent" (click)="deleteItem( i, row.setNumbers )">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

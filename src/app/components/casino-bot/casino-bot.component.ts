@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material";
-import {CasinoBot, ElementOfBetting, ElementOfMainTable, ElementRoulette} from './casino-bot';
+import { CasinoBot, ElementOfBetting, ElementOfMainTable, ElementRoulette } from './casino-bot';
 import { CasinoBotService } from './casino-bot.service';
 import { Observable } from 'rxjs';
 
@@ -108,5 +108,7 @@ export class CasinoBotComponent implements OnInit {
     console.log("isForceStage2Roulette",this.isForceStage2Roulette);*/
 
     console.log("dataSourceBettingOfPlayers",this.dataSourceBettingOfPlayers.data);
+
+    console.log("dataSourceRoulette",this.dataSourceRoulette.data);
   }
 }

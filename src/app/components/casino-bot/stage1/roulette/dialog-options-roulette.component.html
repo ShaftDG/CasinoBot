@@ -1,4 +1,4 @@
-<form>
+<form #formControl="ngForm">
 <div mat-dialog-content style="padding: 10px">
   <h4 class="chose-info">Options / Stage 1 / Roulette</h4>
 
@@ -7,10 +7,13 @@
       <div class="container-input">
         <mat-form-field class="input">
           <input matInput type="number"
+                 #input
                  step="0.1"
                  placeholder="Amount of replenishment"
                  [(ngModel)]="data.amountOfReplenishment" name="amountOfReplenishment"
+                 required
           >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
     </mat-card-content>
@@ -29,22 +32,34 @@
 
       <div class="container-input">
         <mat-form-field class="input-stage1">
-          <input matInput type="number"
+          <input matInput
+                 type="number"
+                 #input
                  placeholder="Max count games"
                  [(ngModel)]="data.maxCountGamesStage0" name="maxCountGamesStage1"
+                 required
           >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input-stage1">
-          <input matInput type="number"
+          <input matInput
+                 #input
+                 type="number"
                  placeholder="Max win games"
                  [(ngModel)]="data.maxWinGamesStage0" name="maxWinGamesStage1"
+                 required
           >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input-stage1">
-          <input matInput type="number"
+          <input matInput
+                 #input
+                 type="number"
                  placeholder="Max balance"
                  [(ngModel)]="data.maxBalanceStage0" name="maxBalancestage1"
+                 required
           >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -61,17 +76,25 @@
 
       <div class="container-input">
         <mat-form-field class="input-stage2">
-          <input matInput type="number"
+          <input matInput
+                 #input
+                 type="number"
                  step="1.0"
                  placeholder="Max win games"
                  [(ngModel)]="data.maxWinGamesStage1" name="maxWinGamesStage2"
+                 required
           >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input-stage2">
-          <input matInput type="number"
+          <input matInput
+                 #input
+                 type="number"
                  placeholder="Max balance"
                  [(ngModel)]="data.maxBalanceStage1" name="maxBalanceStage2"
+                 required
           >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -145,7 +168,10 @@
 </div>
   <div mat-dialog-actions>
     <div class="container-button-ok">
-      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+      <button mat-button
+              [mat-dialog-close]="data"
+              cdkFocusInitial
+              [disabled]="!formControl.valid">Ok</button>
     </div>
   </div>
 </form>
