@@ -1,6 +1,4 @@
-import {MatTableDataSource} from "@angular/material";
-
-export class CasinoBot{
+export class CasinoBot {
   constructor(
     public stage1: Stage1/*,
     public stage2: Stage2*/) { }

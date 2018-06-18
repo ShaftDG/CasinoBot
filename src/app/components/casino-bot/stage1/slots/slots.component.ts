@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Roulette, Slots} from '../../casino-bot';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Slots } from '../../casino-bot';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 import {FormControl, Validators} from '@angular/forms';
 
@@ -21,7 +21,7 @@ export class SlotsComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(DialogOptionsSlots, {
+    const dialogRef = this.dialog.open(DialogOptionsSlotsComponent, {
       width: '515px',
       data: this.slots.dataOptionsSlots,
       disableClose: true,
@@ -41,15 +41,13 @@ export class SlotsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-options-slots',
+  selector: 'app-dialog-options-slots',
   templateUrl: './dialog-options-slots.component.html',
   styleUrls: ['./dialog-options-slots.component.css']
 })
-export class DialogOptionsSlots {
+export class DialogOptionsSlotsComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOptionsSlots>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -61,8 +59,4 @@ export class DialogOptionsSlots {
       this.formControl.hasError('email') ? 'Not a valid email' :
         '';
   }
-  /* onNoClick(): void {
-     this.dialogRef.close();
-   }*/
-
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { General } from "../../casino-bot";
+import { General } from '../../casino-bot';
 
 @Component({
   selector: 'app-general',
@@ -10,7 +10,7 @@ export class GeneralComponent implements OnInit {
 
   @Input() general: General;
   @Output() generalChange = new EventEmitter<General>();
-  onGeneralChange(model: General){
+  onGeneralChange(model: General) {
     this.general = model;
     this.generalChange.emit(model);
   }

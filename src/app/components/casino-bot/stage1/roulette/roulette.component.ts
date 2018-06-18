@@ -1,21 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Optional, Host } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {
-  Blackjack,
-  CasinoBot,
-  ElementOfBetting,
-  ElementRoulette,
-  OptionsElementsRoulette, Roulette,
-  SetNumbersRouletteStage1
-} from '../../casino-bot';
-import { CasinoBotService } from '../../casino-bot.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { ElementRoulette, Roulette, SetNumbersRouletteStage1 } from '../../casino-bot';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
-import { SatPopover } from '@ncstate/sat-popover';
-import { filter } from 'rxjs/operators';
-import { DataSource, SelectionModel } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -25,22 +12,22 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class RouletteComponent implements OnInit {
 
-  @Input() roulette: Roulette;
-  @Output() rouletteChange = new EventEmitter<Roulette>();
-  onRouletteChange(model: Roulette){
-    this.roulette = model;
-    this.rouletteChange.emit(model);
-  }
-
   // table
-  displayedColumns: string[] = ['setNumbers', 'bets', 'sessionBet', 'actions'];
-  pageSize: number = 5;
+  displayedColumns: string[];
+  pageSize: number;
   dataSourceRoulette: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   index: number;
   setNumbers: string;
   dataDialog: DataDialog;
+
+  @Input() roulette: Roulette;
+  @Output() rouletteChange = new EventEmitter<Roulette>();
+  onRouletteChange(model: Roulette) {
+    this.roulette = model;
+    this.rouletteChange.emit(model);
+  }
 
   constructor(public dialog: MatDialog) { }
 
@@ -54,8 +41,8 @@ export class RouletteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        //console.log(result.dataElementRoulette.setNumbers);
-        let setNs = result.dataElementRoulette.setNumbers.toString();
+        // console.log(result.dataElementRoulette.setNumbers);
+        const setNs = result.dataElementRoulette.setNumbers.toString();
         result.dataElementRoulette.setNumbers = setNs;
         const foundIndex = this.dataSourceRoulette.data.findIndex(x => x.setNumbers === setNs);
         if (foundIndex === -1 ||
@@ -77,7 +64,7 @@ export class RouletteComponent implements OnInit {
             sessionBet: false
           },
           selectValue: this.roulette.setNumbersRouletteStage1
-        }
+        };
       }
     });
   }
@@ -99,7 +86,7 @@ export class RouletteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // console.log(result.dataElementRoulette.setNumbers);
-        let setNs = result.dataElementRoulette.setNumbers.toString();
+        const setNs = result.dataElementRoulette.setNumbers.toString();
         result.dataElementRoulette.setNumbers = setNs;
         const foundIndex = this.dataSourceRoulette.data.findIndex(x => x.setNumbers === setNs);
         this.dataSourceRoulette.data.splice(this.index, 1, result.dataElementRoulette);
@@ -121,7 +108,7 @@ export class RouletteComponent implements OnInit {
             sessionBet: false
           },
           selectValue: this.roulette.setNumbersRouletteStage1
-        }
+        };
       }
     });
   }
@@ -159,7 +146,7 @@ export class RouletteComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(DialogOptionsRoulette, {
+    const dialogRef = this.dialog.open(DialogOptionsRouletteComponent, {
       width: '515px',
       data: this.roulette.dataOptionsRoulette,
       disableClose: true,
@@ -174,6 +161,8 @@ export class RouletteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.displayedColumns = ['setNumbers', 'bets', 'sessionBet', 'actions'];
+    this.pageSize = 5;
     this.dataSourceRoulette = new MatTableDataSource<ElementRoulette>(this.roulette.ELEMENT_DATA_ROULETTE);
     this.dataSourceRoulette.paginator = this.paginator;
     this.dataDialog = {
@@ -183,21 +172,19 @@ export class RouletteComponent implements OnInit {
         sessionBet: false
       },
       selectValue: this.roulette.setNumbersRouletteStage1
-    }
+    };
   }
 
 }
 
 @Component({
-  selector: 'dialog-options-roulette',
+  selector: 'app-dialog-options-roulette',
   templateUrl: './dialog-options-roulette.component.html',
   styleUrls: ['./dialog-options-roulette.component.css']
 })
-export class DialogOptionsRoulette {
+export class DialogOptionsRouletteComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOptionsRoulette>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -209,10 +196,6 @@ export class DialogOptionsRoulette {
       this.formControl.hasError('email') ? 'Not a valid email' :
         '';
   }
-  /* onNoClick(): void {
-     this.dialogRef.close();
-   }*/
-
 }
 
 export interface DataDialog {

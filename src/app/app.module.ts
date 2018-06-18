@@ -29,12 +29,17 @@ import { SatPopoverModule } from '@ncstate/sat-popover';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { CasinoBotComponent } from './components/casino-bot/casino-bot.component';
-import { BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent } from './components/casino-bot/stage1/blackjack/blackjack.component';
+import {
+  BlackjackComponent,
+  DialogOptionsBlackjackComponent,
+  DialogBettingOfPlayersComponent,
+  InlineEditComponent
+} from './components/casino-bot/stage1/blackjack/blackjack.component';
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
-import { RouletteComponent, DialogOptionsRoulette } from './components/casino-bot/stage1/roulette/roulette.component';
+import { RouletteComponent, DialogOptionsRouletteComponent } from './components/casino-bot/stage1/roulette/roulette.component';
 import { AddDialogComponent } from './components/casino-bot/stage1/roulette/add-dialog/add-dialog.component';
 import { CasinoBotService } from './components/casino-bot/casino-bot.service';
-import { SlotsComponent, DialogOptionsSlots } from './components/casino-bot/stage1/slots/slots.component';
+import { SlotsComponent, DialogOptionsSlotsComponent } from './components/casino-bot/stage1/slots/slots.component';
 
 const routes: Routes = [
   {path: 'about', component: AboutComponent},
@@ -43,19 +48,19 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents: [
-    BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers,
-    RouletteComponent, DialogOptionsRoulette, AddDialogComponent,
-    SlotsComponent, DialogOptionsSlots
+    BlackjackComponent, DialogOptionsBlackjackComponent, DialogBettingOfPlayersComponent,
+    RouletteComponent, DialogOptionsRouletteComponent, AddDialogComponent,
+    SlotsComponent, DialogOptionsSlotsComponent
   ],
   declarations: [
     AppComponent,
     MainComponent,
     AboutComponent,
     CasinoBotComponent,
-    BlackjackComponent, DialogOptionsBlackjack, DialogBettingOfPlayers, InlineEditComponent,
+    BlackjackComponent, DialogOptionsBlackjackComponent, DialogBettingOfPlayersComponent, InlineEditComponent,
     GeneralComponent,
-    RouletteComponent, DialogOptionsRoulette, AddDialogComponent,
-    SlotsComponent, DialogOptionsSlots
+    RouletteComponent, DialogOptionsRouletteComponent, AddDialogComponent,
+    SlotsComponent, DialogOptionsSlotsComponent
   ],
   imports: [
     BrowserModule,

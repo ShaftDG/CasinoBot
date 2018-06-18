@@ -1,14 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatTableDataSource } from "@angular/material";
-import {
-  Blackjack, CasinoBot,
-  ElementOfBetting,
-  ElementOfMainTable,
-  ElementRoulette,
-  General, Roulette, Slots
-} from './casino-bot';
+import { Component, OnInit } from '@angular/core';
+import { CasinoBot, Blackjack, General, Roulette, Slots } from './casino-bot';
 import { CasinoBotService } from './casino-bot.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-casino-bot',

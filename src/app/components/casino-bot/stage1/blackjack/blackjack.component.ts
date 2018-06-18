@@ -1,20 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Optional, Host } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {
-  CasinoBot,
-  ElementOfBetting,
-  ElementOfMainTable,
-  General,
-  Blackjack,
-  OptionsElementsBlackjack, ElementRoulette
-} from '../../casino-bot';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { ElementOfBetting, ElementOfMainTable, Blackjack } from '../../casino-bot';
 import { SatPopover } from '@ncstate/sat-popover';
 import { filter } from 'rxjs/operators';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-blackjack',
@@ -22,28 +15,27 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./blackjack.component.css']
 })
 export class BlackjackComponent implements OnInit {
-
-  @Input() blackjack: Blackjack;
-  @Output() blackjackChange = new EventEmitter<Blackjack>();
-  onBlackjackChange(model: Blackjack){
-    this.blackjack = model;
-    this.blackjackChange.emit(model);
-  }
-
-  displayedColumns = ['name', 'value'];
-  pageSize = 5;
+  displayedColumns: string[];
+  pageSize: number;
   dataSourceBlackjack: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumnsBettingOfplayers = ['item', 'player', 'bet'];
-  pageSizeBetting = 3;
+  displayedColumnsBettingOfplayers: string[];
+  pageSizeBetting: number;
   dataSourceBettingOfPlayers: any;
+
+  @Input() blackjack: Blackjack;
+  @Output() blackjackChange = new EventEmitter<Blackjack>();
+  onBlackjackChange(model: Blackjack) {
+    this.blackjack = model;
+    this.blackjackChange.emit(model);
+  }
 
   constructor(public dialog: MatDialog, public dialogBetting: MatDialog) {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(DialogOptionsBlackjack, {
+    const dialogRef = this.dialog.open(DialogOptionsBlackjackComponent, {
       width: '515px',
       data: this.blackjack.dataOptionsBlackjack,
       disableClose: true,
@@ -58,7 +50,7 @@ export class BlackjackComponent implements OnInit {
   }
 
   openDialogBettingOfPlayers(): void {
-    let dialogRef = this.dialogBetting.open(DialogBettingOfPlayers, {
+    const dialogRef = this.dialogBetting.open(DialogBettingOfPlayersComponent, {
       width: '400px',
       data: { dataSource: this.dataSourceBettingOfPlayers,
               nameColumn: this.displayedColumnsBettingOfplayers,
@@ -75,6 +67,10 @@ export class BlackjackComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.displayedColumns = ['name', 'value'];
+    this.pageSize = 5;
+    this.displayedColumnsBettingOfplayers = ['item', 'player', 'bet'];
+    this.pageSizeBetting = 3;
     this.dataSourceBlackjack = new MatTableDataSource<ElementOfMainTable>(this.blackjack.ELEMENT_DATA_MAIN);
     this.dataSourceBettingOfPlayers = new MatTableDataSource<ElementOfBetting>(this.blackjack.ELEMENT_DATA_BETTING);
     this.dataSourceBlackjack.paginator = this.paginator;
@@ -83,14 +79,12 @@ export class BlackjackComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-options-blackjack',
+  selector: 'app-dialog-options-blackjack',
   templateUrl: './dialog-options-blackjack.component.html',
   styleUrls: ['./dialog-options-blackjack.component.css']
 })
-export class DialogOptionsBlackjack {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOptionsBlackjack>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+export class DialogOptionsBlackjackComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -110,16 +104,14 @@ export class DialogOptionsBlackjack {
 }
 
 @Component({
-  selector: 'dialog-betting-of-players',
+  selector: 'app-dialog-betting-of-players',
   templateUrl: './dialog-betting-of-players.component.html',
   styleUrls: ['./dialog-betting-of-players.component.css']
 })
-export class DialogBettingOfPlayers {
+export class DialogBettingOfPlayersComponent implements OnInit {
   selection = new SelectionModel<ElementOfBetting>(true, []);
 
-  constructor(
-    public dialogRef1: MatDialogRef<DialogBettingOfPlayers>,
-    @Inject(MAT_DIALOG_DATA) public dataBetting: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public dataBetting: any) { }
 
     dt: any;
   ngOnInit() {
@@ -129,22 +121,18 @@ export class DialogBettingOfPlayers {
   update(el: ElementOfBetting, bet: number) {
     if (bet == null) { return; }
     // copy and mutate
-    const copy = this.dt.data().slice()
+    const copy = this.dt.data().slice();
     el.bet = bet;
     this.dt.update(copy);
   }
-  /* onNoClick(): void {
-     this.dialogRef.close();
-   }*/
-
 }
 
 @Component({
-  selector: 'inline-edit',
+  selector: 'app-inline-edit',
   templateUrl: './inline-edit.component.html',
   styleUrls: ['./inline-edit.component.scss']
 })
-export class InlineEditComponent {
+export class InlineEditComponent implements OnInit {
 
   /** Overrides the bet and provides a reset value when changes are cancelled. */
   @Input()
