@@ -5,7 +5,7 @@ import {
   ElementOfBetting,
   ElementOfMainTable,
   ElementRoulette,
-  General, Roulette
+  General, Roulette, Slots
 } from './casino-bot';
 import { CasinoBotService } from './casino-bot.service';
 import { Observable } from 'rxjs';
@@ -20,35 +20,41 @@ export class CasinoBotComponent implements OnInit {
   title = 'CasinoBot 1.3.1';
 
   casinoBot: CasinoBot;
-  casinoBots: Array<CasinoBot>;
 
-  //variables General Stage1
+  // variables General Stage1
   general: General;
 
-  //variables Blackjack Stage1
+  // variables Blackjack Stage1
   blackjack: Blackjack;
 
-  //variables Roulette Stage1
+  // variables Roulette Stage1
   roulette: Roulette;
 
+  // variables Slots Stage1
+  slots: Slots;
+
   constructor(private serv: CasinoBotService) {
-    //this.casinoBots = new Array<CasinoBot>();
+    // this.casinoBots = new Array<CasinoBot>();
   }
 
   ngOnInit() {
    // this.loadUsers();
     this.casinoBot = this.serv.getBot();
-    //variables General Stage1
+    // variables General Stage1
     this.general = this.casinoBot.stage1.general;
 
-    //variables Blackjack Stage1
+    // variables Blackjack Stage1
     this.blackjack = this.casinoBot.stage1.blackjack;
 
-    //variables Roulette Stage1
+    // variables Roulette Stage1
     this.roulette = this.casinoBot.stage1.roulette;
+
+    // variables Slots Stage1
+    this.slots = this.casinoBot.stage1.slots;
+
   }
 
-  //загрузка бота
+  // загрузка бота
 /*   private loadUsers() {
     this.serv.getUsers().subscribe((data: CasinoBot[]) => {
       this.casinoBots = data;
@@ -72,6 +78,6 @@ export class CasinoBotComponent implements OnInit {
     // console.log("dataSourceBettingOfPlayers",this.dataSourceBettingOfPlayers.data);
 
     // console.log("dataSourceRoulette",this.dataSourceRoulette.data);
-    console.log("roulette",this.casinoBot.stage1.roulette);
+    console.log('casinoBot', this.casinoBot);
   }
 }

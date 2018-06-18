@@ -27,14 +27,16 @@
 @media all and (max-width:860px) {
   .card {
     width: 90%;
+    height: 100%;
     float: left;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     margin-left: 1%;
   }
   .card-options {
     width: 90%;
+    height: 100%;
     float: left;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     margin-left: 1%;
   }
 }

@@ -16,7 +16,7 @@ import { filter } from 'rxjs/operators';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import {FormControl, Validators} from "@angular/forms";
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-roulette',
@@ -32,9 +32,9 @@ export class RouletteComponent implements OnInit {
     this.rouletteChange.emit(model);
   }
 
-  //table
-  displayedColumns = ['setNumbers', 'bets', 'sessionBet', 'actions'];
-  pageSize = 5;
+  // table
+  displayedColumns: string[] = ['setNumbers', 'bets', 'sessionBet', 'actions'];
+  pageSize: number = 5;
   dataSourceRoulette: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

@@ -45,7 +45,21 @@ export interface Roulette {
   ELEMENT_DATA_ROULETTE: ElementRoulette[];
 }
 export interface Slots {
+  selectedVariantSlots: string;
+  variantSlots: VariantSlots[];
+  selectedBetPerLine: number;
+  betPerLine: number[];
+  selectedCoinValue: number;
+  coinValue: number[];
+  dataOptionsSlots: OptionsElementsSlot;
+  isMoneyGameSlot: boolean;
+  isStage1Slot: boolean;
+  isForceStage2Slot: boolean;
+}
 
+export interface VariantSlots {
+  value: string;
+  viewValue: string;
 }
 
 export interface VariantRoulette {
@@ -106,4 +120,13 @@ export interface OptionsElementsBlackjack {
   maxBalanceStage1: number;
   maxWinGamesStage2: number;
   maxBalanceStage2: number;
+}
+
+export interface OptionsElementsSlot {
+  amountOfReplenishment: number;
+  maxCountGamesStage0: number;
+  maxWinGamesStage0: number;
+  maxBalanceStage0: number;
+  maxWinGamesStage1: number;
+  maxBalanceStage1: number;
 }

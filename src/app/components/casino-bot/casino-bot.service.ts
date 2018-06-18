@@ -5,19 +5,19 @@ import {
   ElementOfBetting,
   ElementOfMainTable, ElementRoulette,
   GamesGeneralStage1,
-  OptionsElementsBlackjack, OptionsElementsRoulette,
+  OptionsElementsBlackjack, OptionsElementsRoulette, OptionsElementsSlot,
   ProvidersBlackjackStage1,
-  ProvidersGeneralStage1, SetNumbersRouletteStage1, VariantRoulette,
+  ProvidersGeneralStage1, SetNumbersRouletteStage1, VariantRoulette, VariantSlots,
 } from './casino-bot';
 
 
 @Injectable()
-export class CasinoBotService{
+export class CasinoBotService {
 
-  private url = "http://localhost:64269/api/users/";
-  constructor(private http: HttpClient){ }
+  private url = 'http://localhost:64269/api/users/';
+  constructor(private http: HttpClient) { }
 
-  getBot(){
+  getBot() {
     return {
               stage1: {
                 general: {
@@ -50,33 +50,44 @@ export class CasinoBotService{
                   dataOptionsRoulette: dataOptionsRoulette,
                   ELEMENT_DATA_ROULETTE: ELEMENT_DATA_ROULETTE,
                 },
-                slots: {}
+                slots: {
+                  selectedVariantSlots: selectedVariantSlots,
+                  variantSlots: variantSlots,
+                  selectedBetPerLine: selectedBetPerLine,
+                  betPerLine: betPerLine,
+                  selectedCoinValue: selectedCoinValue,
+                  coinValue: coinValue,
+                  dataOptionsSlots: dataOptionsSlots,
+                  isMoneyGameSlot: isMoneyGameSlot,
+                  isStage1Slot: isStage1Slot,
+                  isForceStage2Slot: isForceStage2Slot,
+                }
               }
-          }
+          };
           // return this.http.get(this.url);
   }
 
-  createUser(casinoBot: CasinoBot){
+  createUser(casinoBot: CasinoBot) {
     return this.http.post(this.url, casinoBot);
   }
   updateUser(id: number, casinoBot: CasinoBot) {
-    const urlParams = new HttpParams().set("id", id.toString());
+    const urlParams = new HttpParams().set('id', id.toString());
     return this.http.put(this.url, casinoBot, { params: urlParams});
   }
-  deleteUser(id: number){
-    const urlParams = new HttpParams().set("id", id.toString());
+  deleteUser(id: number) {
+    const urlParams = new HttpParams().set('id', id.toString());
     return this.http.delete(this.url, { params: urlParams});
   }
 }
 
-//variables General Stage1
-const selectedValueGameGeneralStage1: string = 'Blackjack';
+// variables General Stage1
+const selectedValueGameGeneralStage1 = 'Blackjack';
 const gamesGeneralStage1: GamesGeneralStage1[] = [
   {value: 'blackjack-0', viewValue: 'Blackjack'},
   {value: 'roulette-1', viewValue: 'Roulette'},
   {value: 'slot-2', viewValue: 'Slot'}
 ];
-const selectedValueProviderGeneralStage1: string = 'parimatch9087';
+const selectedValueProviderGeneralStage1 = 'parimatch9087';
 const providersGeneralStage1: ProvidersGeneralStage1[] = [
   {value: 'parimatch9087-0', viewValue: 'parimatch9087'},
   {value: 'parimatch9086-1', viewValue: 'parimatch9086'},
@@ -84,8 +95,8 @@ const providersGeneralStage1: ProvidersGeneralStage1[] = [
   {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
 ];
 
-//variables Blackjack Stage1
-const selectedValueProviderBlackjackStage1: string = 'parimatch9087';
+// variables Blackjack Stage1
+const selectedValueProviderBlackjackStage1 = 'parimatch9087';
 const providersBlackjackStage1: ProvidersBlackjackStage1[] = [
   {value: 'parimatch9087-0', viewValue: 'parimatch9087'},
   {value: 'parimatch9086-1', viewValue: 'parimatch9086'},
@@ -93,10 +104,10 @@ const providersBlackjackStage1: ProvidersBlackjackStage1[] = [
   {value: 'pankasyno4125-3', viewValue: 'pankasyno4125'}
 ];
 
-const isMoneyGameBlackjack: boolean = false;
-const isAutoPlayBlackjack: boolean = false;
-const isStage1Blackjack: boolean = false;
-const isForceStage2Blackjack: boolean = false;
+const isMoneyGameBlackjack = false;
+const isAutoPlayBlackjack = false;
+const isStage1Blackjack = false;
+const isForceStage2Blackjack = false;
 
 const dataOptionsBlackjack: OptionsElementsBlackjack = {
   amountOfReplenishment: 2.0,
@@ -124,7 +135,7 @@ const ELEMENT_DATA_BETTING: ElementOfBetting[] = [
   {item: '3', player: false, bet: 1}
 ];
 
-//variables Roulette Stage1
+// variables Roulette Stage1
 const setNumbersRouletteStage1: SetNumbersRouletteStage1[] = [
   {value: 'split-0', viewValue: 'split'},
   {value: 'fourOfKind-1', viewValue: 'fourOfKind'},
@@ -139,18 +150,18 @@ const setNumbersRouletteStage1: SetNumbersRouletteStage1[] = [
   {value: '19/36-10', viewValue: '19/36'},
   {value: '1/36-11', viewValue: '1/36'}
 ];
-const  numberSet: number = 1;
-const  betSet: number = 1;
-const  betNumbers: number = 1;
+const  numberSet = 1;
+const  betSet = 1;
+const  betNumbers = 1;
 
-const selectedVariantRouletteRouletteStage1: string = 'roulette163';
+const selectedVariantRouletteRouletteStage1 = 'roulette163';
 const variantRoulette: VariantRoulette[] = [
   {value: 'roulette163-0', viewValue: 'roulette163'},
   {value: 'roulette165-1', viewValue: 'roulette165'}
 ];
-const isMoneyGameRoulette: boolean = false;
-const isStage1Roulette: boolean = true;
-const isForceStage2Roulette: boolean = false;
+const isMoneyGameRoulette = false;
+const isStage1Roulette = true;
+const isForceStage2Roulette = false;
 const dataOptionsRoulette: OptionsElementsRoulette = {
   amountOfReplenishment: 10.0,
   maxCountGamesStage0: 10.0,
@@ -170,3 +181,27 @@ const ELEMENT_DATA_ROULETTE: ElementRoulette[] = [
   { setNumbers: 'sixLine', bets: 100, sessionBet: true },
   { setNumbers: '9', bets: 150, sessionBet: true }
 ];
+
+// variables Slot Stage1
+const selectedVariantSlots = 'slotPM8321';
+const variantSlots: VariantSlots[] = [
+  {value: 'slotPM8321-0', viewValue: 'slotPM8321'}
+];
+
+const dataOptionsSlots: OptionsElementsSlot = {
+  amountOfReplenishment: 5.0,
+  maxCountGamesStage0: 5.0,
+  maxWinGamesStage0: 5.0,
+  maxBalanceStage0: 5.0,
+  maxWinGamesStage1: 5.0,
+  maxBalanceStage1: 5.0,
+};
+
+const selectedBetPerLine = 1.0;
+const betPerLine: number[] = [ 1.0, 2.0, 3.0, 4.0 ];
+const selectedCoinValue = 0.01;
+const coinValue: number[] = [ 0.01, 0.05, 0.1, 0.25, 0.5, 1.0 ];
+
+const isMoneyGameSlot = false;
+const isStage1Slot = false;
+const isForceStage2Slot = false;

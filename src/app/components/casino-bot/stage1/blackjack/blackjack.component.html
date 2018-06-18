@@ -1,7 +1,7 @@
 <form>
   <div class="container">
-      <mat-card class="card" >
-        <div class="mat-elevation-z8">
+      <mat-card class="card mat-elevation-z8" >
+        <div>
             <table mat-table [dataSource]="dataSourceBlackjack">
 
               <!--- Note that these columns can be defined in any order.
@@ -25,7 +25,7 @@
           <mat-paginator [pageSize]="pageSize"></mat-paginator>
         </div>
       </mat-card>
-      <mat-card class="card-options">
+      <mat-card class="card-options mat-elevation-z8">
         <div>
           <mat-form-field class="select">
             <mat-select placeholder="Choose provider"

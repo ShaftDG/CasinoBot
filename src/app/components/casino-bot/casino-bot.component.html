@@ -24,11 +24,8 @@
             </mat-tab>
             <mat-tab label="Slot">
               <div class="demo-tab-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue.
-                Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus.
-                In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec,
-                feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor,
-                orci enim rutrum enim, vel tempor sapien arcu a tellus.
+                <app-slots [(slots)] = "slots">
+                </app-slots>
               </div>
             </mat-tab>
         </mat-tab-group>

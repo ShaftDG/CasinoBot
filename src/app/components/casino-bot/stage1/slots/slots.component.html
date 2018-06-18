@@ -1,0 +1,72 @@
+<form>
+  <div class="container">
+    <mat-card class="card mat-elevation-z8" >
+      <div>
+        <mat-form-field class="select">
+          <mat-select placeholder="Choose bet per line"
+                      [(value)]="slots.selectedBetPerLine"
+                      (ngModelChange)="onSlotsChange($event)"
+          >
+            <mat-option *ngFor="let bet of slots.betPerLine" [value]="bet">
+              {{bet}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="select">
+          <mat-select placeholder="Choose coin value"
+                      [(value)]="slots.selectedCoinValue"
+                      (ngModelChange)="onSlotsChange($event)"
+          >
+            <mat-option *ngFor="let value of slots.coinValue" [value]="value">
+              {{value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <h4 class="chose-info">Total bet: {{slots.selectedBetPerLine * slots.selectedCoinValue * 25}}$</h4>
+      </div>
+    </mat-card>
+    <mat-card class="card-options mat-elevation-z8">
+      <div>
+        <mat-form-field class="select">
+          <mat-select placeholder="Choose slots"
+                      [(value)]="slots.selectedVariantSlots"
+                      name="variant"
+                      (ngModelChange)="onSlotsChange($event)"
+          >
+            <mat-option *ngFor="let variant of slots.variantSlots" [value]="variant.viewValue">
+              {{variant.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="container-button">
+          <button mat-raised-button class="button" (click)="openDialog()">Options</button>
+        </div>
+        <div class="container-checkbox">
+          <mat-checkbox [checked]="slots.isMoneyGameSlot"
+                        (change)="slots.isMoneyGameSlot = !slots.isMoneyGameSlot"
+                        (ngModelChange)="onSlotsChange($event)"
+          >Money game
+          </mat-checkbox>
+        </div>
+        <div class="container-checkbox">
+          <mat-checkbox [checked]="slots.isStage1Slot"
+                        (change)="slots.isStage1Slot = !slots.isStage1Slot"
+                        (ngModelChange)="onSlotsChange($event)"
+          >Stage 1
+          </mat-checkbox>
+        </div>
+        <div class="container-checkbox">
+          <mat-checkbox [checked]="slots.isForceStage2Slot"
+                        (change)="slots.isForceStage2Slot = !slots.isForceStage2Slot"
+                        (ngModelChange)="onSlotsChange($event)"
+          >Force stage 2
+          </mat-checkbox>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</form>
