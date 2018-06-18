@@ -3,34 +3,32 @@
       <div>
       <mat-form-field class="select">
         <mat-select placeholder="Choose game"
-                    [(ngModel)]="selectedValueGameGeneralStage1"
-                    name="game"
-                    (ngModelChange)="onGameChange($event)"
+                    [(value)]="general.selectedValueGameGeneralStage1"
+                    (ngModelChange)="onGeneralChange($event)"
         >
-          <mat-option *ngFor="let game of gamesGeneralStage1" [value]="game.viewValue">
+          <mat-option *ngFor="let game of general.gamesGeneralStage1" [value]="game.viewValue">
             {{game.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <p class ="chose-info"> You chose the game: {{selectedValueGameGeneralStage1}} </p>
+      <p class ="chose-info"> You chose the game: {{general.selectedValueGameGeneralStage1}} </p>
       </div>
   </mat-card>
   <mat-card class="card">
       <div>
        <mat-form-field class="select">
          <mat-select placeholder="Choose provider"
-                     [(ngModel)]="selectedValueProviderGeneralStage1"
-                     name="provider"
-                     (ngModelChange)="onProviderChange($event)"
+                     [(value)]="general.selectedValueProviderGeneralStage1"
+                     (ngModelChange)="onGeneralChange($event)"
          >
-           <mat-option *ngFor="let provider of providersGeneralStage1" [value]="provider.viewValue">
+           <mat-option *ngFor="let provider of general.providersGeneralStage1" [value]="provider.viewValue">
              {{provider.viewValue}}
            </mat-option>
          </mat-select>
        </mat-form-field>
 
-      <p class ="chose-info"> You chose a provider: {{selectedValueProviderGeneralStage1}} </p>
+      <p class ="chose-info"> You chose a provider: {{general.selectedValueProviderGeneralStage1}} </p>
       </div>
   </mat-card>
 

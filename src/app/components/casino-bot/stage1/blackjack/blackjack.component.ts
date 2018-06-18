@@ -1,7 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Optional, Host } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CasinoBot, ElementOfBetting, ElementOfMainTable, OptionsElementsBlackjack } from '../../casino-bot';
+import {
+  CasinoBot,
+  ElementOfBetting,
+  ElementOfMainTable,
+  General,
+  Blackjack,
+  OptionsElementsBlackjack, ElementRoulette
+} from '../../casino-bot';
 import { SatPopover } from '@ncstate/sat-popover';
 import { filter } from 'rxjs/operators';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
@@ -16,78 +23,37 @@ import {FormControl, Validators} from "@angular/forms";
 })
 export class BlackjackComponent implements OnInit {
 
- //checkboxes
-  @Input() isMoneyGameBlackjack:boolean;
-  @Output() isMoneyGameBlackjackChange = new EventEmitter<boolean>();
-  onMoneyGameBlackjackChange(model: boolean){
-    this.isMoneyGameBlackjack = model;
-    this.isMoneyGameBlackjackChange.emit(model);
-  }
-  @Input() isAutoPlayBlackjack:boolean;
-  @Output() isAutoPlayBlackjackChange = new EventEmitter<boolean>();
-  onAutoPlayBlackjackChange(model: boolean){
-    this.isAutoPlayBlackjack = model;
-    this.isAutoPlayBlackjackChange.emit(model);
-  }
-  @Input() isStage1Blackjack:boolean;
-  @Output() isStage1BlackjackChange = new EventEmitter<boolean>();
-  onStage1BlackjackChange(model: boolean){
-    this.isStage1Blackjack = model;
-    this.isStage1BlackjackChange.emit(model);
-  }
-  @Input() isForceStage2Blackjack:boolean;
-  @Output() isForceStage2BlackjackChange = new EventEmitter<boolean>();
-  onForceStage2BlackjackChange(model: boolean){
-    this.isForceStage2Blackjack = model;
-    this.isForceStage2BlackjackChange.emit(model);
+  @Input() blackjack: Blackjack;
+  @Output() blackjackChange = new EventEmitter<Blackjack>();
+  onBlackjackChange(model: Blackjack){
+    this.blackjack = model;
+    this.blackjackChange.emit(model);
   }
 
-  //select
-  @Input() providersBlackjackStage1 = [];
-  @Input() selectedValueProviderBlackjackStage1: string;
-  @Output() selectedValueProviderBlackjackStage1Change = new EventEmitter<string>();
-  onProviderChange(model: string){
-    this.selectedValueProviderBlackjackStage1 = model;
-    this.selectedValueProviderBlackjackStage1Change.emit(model);
-  }
-
-  //table
   displayedColumns = ['name', 'value'];
   pageSize = 5;
-  @Input() dataSourceBlackjack;
+  dataSourceBlackjack: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  //options
-  @Input() dataOptionsBlackjack: OptionsElementsBlackjack;
-  @Output() dataOptionsBlackjackChange = new EventEmitter<OptionsElementsBlackjack>();
-  onDataOptionsBlackjackChange(model: OptionsElementsBlackjack){
-    this.dataOptionsBlackjack = model;
-    this.dataOptionsBlackjackChange.emit(model);
-  }
-
-  //table
   displayedColumnsBettingOfplayers = ['item', 'player', 'bet'];
   pageSizeBetting = 3;
-  @Input() dataSourceBettingOfPlayers;
-  @Output() dataSourceBettingOfPlayersChange = new EventEmitter<ElementOfBetting>();
-  onDataSourceBettingOfPlayersChange(model: ElementOfBetting){
-    this.dataSourceBettingOfPlayers = model;
-    this.dataSourceBettingOfPlayersChange.emit(model);
-  }
+  dataSourceBettingOfPlayers: any;
+
   constructor(public dialog: MatDialog, public dialogBetting: MatDialog) {
   }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogOptionsBlackjack, {
       width: '515px',
-      data: this.dataOptionsBlackjack,
+      data: this.blackjack.dataOptionsBlackjack,
       disableClose: true,
       closeOnNavigation: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.onDataOptionsBlackjackChange(result);
+      this.blackjack.dataOptionsBlackjack = result;
+      this.onBlackjackChange(this.blackjack);
     });
   }
 
@@ -103,11 +69,14 @@ export class BlackjackComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.onDataSourceBettingOfPlayersChange(result.dataSource);
+      this.blackjack.ELEMENT_DATA_BETTING = result.dataSource.data;
+      this.onBlackjackChange(this.blackjack);
     });
   }
 
   ngOnInit() {
+    this.dataSourceBlackjack = new MatTableDataSource<ElementOfMainTable>(this.blackjack.ELEMENT_DATA_MAIN);
+    this.dataSourceBettingOfPlayers = new MatTableDataSource<ElementOfBetting>(this.blackjack.ELEMENT_DATA_BETTING);
     this.dataSourceBlackjack.paginator = this.paginator;
   }
 

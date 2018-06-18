@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Opti
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {
+  Blackjack,
   CasinoBot,
   ElementOfBetting,
   ElementRoulette,
-  OptionsElementsRoulette,
+  OptionsElementsRoulette, Roulette,
   SetNumbersRouletteStage1
 } from '../../casino-bot';
 import { CasinoBotService } from '../../casino-bot.service';
@@ -23,84 +24,19 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./roulette.component.css']
 })
 export class RouletteComponent implements OnInit {
-  //inputs
-  @Input() numberSet: number;
-  @Output() numberSetChange = new EventEmitter<number>();
-  onNumberSetChange(model: number){
-    this.numberSet = model;
-    this.numberSetChange.emit(model);
-  }
 
-  @Input() betSet: number;
-  @Output() betSetChange = new EventEmitter<number>();
-  onBetSetChange(model: number){
-    this.betSet = model;
-    this.betSetChange.emit(model);
-  }
-
-  @Input() betNumbers: number;
-  @Output() betNumbersChange = new EventEmitter<number>();
-  onBetNumbersChange(model: number){
-    this.betNumbers = model;
-    this.betNumbersChange.emit(model);
-  }
-
-  //checkboxes
-  @Input() isMoneyGameRoulette:boolean;
-  @Output() isMoneyGameRouletteChange = new EventEmitter<boolean>();
-  onMoneyGameRouletteChange(model: boolean){
-    this.isMoneyGameRoulette = model;
-    this.isMoneyGameRouletteChange.emit(model);
-  }
-
-  @Input() isStage1Roulette:boolean;
-  @Output() isStage1RouletteChange = new EventEmitter<boolean>();
-  onStage1RouletteChange(model: boolean){
-    this.isStage1Roulette = model;
-    this.isStage1RouletteChange.emit(model);
-  }
-  @Input() isForceStage2Roulette:boolean;
-  @Output() isForceStage2RouletteChange = new EventEmitter<boolean>();
-  onForceStage2RouletteChange(model: boolean){
-    this.isForceStage2Roulette = model;
-    this.isForceStage2RouletteChange.emit(model);
-  }
-
-  //select
-  @Input() variantRoulette = [];
-  @Input() selectedVariantRouletteRouletteStage1: string;
-  @Output() selectedVariantRouletteRouletteStage1Change = new EventEmitter<string>();
-  onVariantRouletteRouletteStage1Change(model: string){
-    this.selectedVariantRouletteRouletteStage1 = model;
-    this.selectedVariantRouletteRouletteStage1Change.emit(model);
-  }
-
-  @Input() setNumbersRouletteStage1 = [];
-  @Input() selectedSetNumbersRouletteStage1: string;
-  @Output() selectedSetNumbersRouletteStage1Change = new EventEmitter<string>();
-  onSetNumbersRouletteStage1Change(model: string){
-    this.selectedSetNumbersRouletteStage1 = model;
-    this.selectedSetNumbersRouletteStage1Change.emit(model);
+  @Input() roulette: Roulette;
+  @Output() rouletteChange = new EventEmitter<Roulette>();
+  onRouletteChange(model: Roulette){
+    this.roulette = model;
+    this.rouletteChange.emit(model);
   }
 
   //table
   displayedColumns = ['setNumbers', 'bets', 'sessionBet', 'actions'];
   pageSize = 5;
-  @Input() dataSourceRoulette;
-  @Output() dataSourceRouletteChange = new EventEmitter<ElementRoulette>();
-  onDataSourceRouletteChange(model: ElementRoulette){
-    this.dataSourceRoulette = model;
-    this.dataSourceRouletteChange.emit(model);
-  }
+  dataSourceRoulette: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  //options
-  @Input() dataOptionsRoulette: OptionsElementsRoulette;
-  @Output() dataOptionsRouletteChange = new EventEmitter<OptionsElementsRoulette>();
-  onDataOptionsRouletteChange(model: OptionsElementsRoulette){
-    this.dataOptionsRoulette = model;
-    this.dataOptionsRouletteChange.emit(model);
-  }
 
   index: number;
   setNumbers: string;
@@ -131,7 +67,7 @@ export class RouletteComponent implements OnInit {
         } else {
             this.dataSourceRoulette.data.splice(foundIndex, 1, result.dataElementRoulette);
         }
-        this.onDataOptionsRouletteChange(this.dataSourceRoulette.data);
+        this.onRouletteChange(this.roulette);
         this.refreshTable();
 
         this.dataDialog = {
@@ -140,7 +76,7 @@ export class RouletteComponent implements OnInit {
             bets: undefined,
             sessionBet: false
           },
-          selectValue: this.setNumbersRouletteStage1
+          selectValue: this.roulette.setNumbersRouletteStage1
         }
       }
     });
@@ -162,20 +98,20 @@ export class RouletteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        //console.log(result.dataElementRoulette.setNumbers);
+        // console.log(result.dataElementRoulette.setNumbers);
         let setNs = result.dataElementRoulette.setNumbers.toString();
         result.dataElementRoulette.setNumbers = setNs;
         const foundIndex = this.dataSourceRoulette.data.findIndex(x => x.setNumbers === setNs);
         this.dataSourceRoulette.data.splice(this.index, 1, result.dataElementRoulette);
         console.log(setNs);
-        if ( //setNs !== 'split' ||
-             setNs !== 'fourOfKind' //||
+        if ( // setNs !== 'split' ||
+             setNs !== 'fourOfKind' // ||
             /* setNs !== 'sixLine'*/ ) {
           if (foundIndex !== this.index) {
             this.dataSourceRoulette.data.splice(foundIndex, 1);
           }
         }
-        this.onDataOptionsRouletteChange(this.dataSourceRoulette.data);
+        this.onRouletteChange(this.roulette);
         this.refreshTable();
 
         this.dataDialog = {
@@ -184,7 +120,7 @@ export class RouletteComponent implements OnInit {
             bets: undefined,
             sessionBet: false
           },
-          selectValue: this.setNumbersRouletteStage1
+          selectValue: this.roulette.setNumbersRouletteStage1
         }
       }
     });
@@ -196,12 +132,14 @@ export class RouletteComponent implements OnInit {
     this.setNumbers = setNumbers;
     // for delete we use splice in order to remove single object from DataService
     this.dataSourceRoulette.data.splice(this.index, 1);
+    this.onRouletteChange(this.roulette);
     this.refreshTable();
   }
 
   // delete all items
   deleteAllItems() {
     this.dataSourceRoulette.data.splice(0, this.dataSourceRoulette.data.length);
+    this.onRouletteChange(this.roulette);
     this.refreshTable();
   }
 
@@ -219,18 +157,20 @@ export class RouletteComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogOptionsRoulette, {
       width: '515px',
-      data: this.dataOptionsRoulette,
+      data: this.roulette.dataOptionsRoulette,
       disableClose: true,
       closeOnNavigation: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.onDataOptionsRouletteChange(result);
+      this.roulette.dataOptionsRoulette = result;
+      this.onRouletteChange(this.roulette);
     });
   }
 
   ngOnInit() {
+    this.dataSourceRoulette = new MatTableDataSource<ElementRoulette>(this.roulette.ELEMENT_DATA_ROULETTE);
     this.dataSourceRoulette.paginator = this.paginator;
     this.dataDialog = {
       dataElementRoulette: {
@@ -238,7 +178,7 @@ export class RouletteComponent implements OnInit {
         bets: undefined,
         sessionBet: false
       },
-      selectValue: this.setNumbersRouletteStage1
+      selectValue: this.roulette.setNumbersRouletteStage1
     }
   }
 

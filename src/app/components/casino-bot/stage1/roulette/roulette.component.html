@@ -26,7 +26,7 @@
                 <mat-checkbox
                   [checked]="element.sessionBet"
                   (change)="element.sessionBet = !element.sessionBet"
-                  (ngModelChange)="onDataSourceRouletteChange($event)"
+                  (ngModelChange)="onRouletteChange($event)"
                 ></mat-checkbox>
             </td>
           </ng-container>
@@ -66,11 +66,11 @@
       <div>
         <mat-form-field class="select">
           <mat-select placeholder="Choose roulette"
-                      [(ngModel)]="selectedVariantRouletteRouletteStage1"
+                      [(value)]="roulette.selectedVariantRouletteRouletteStage1"
                       name="variant"
-                      (ngModelChange)="onVariantRouletteRouletteStage1Change($event)"
+                      (ngModelChange)="onRouletteChange($event)"
           >
-            <mat-option *ngFor="let variant of variantRoulette" [value]="variant.viewValue">
+            <mat-option *ngFor="let variant of roulette.variantRoulette" [value]="variant.viewValue">
               {{variant.viewValue}}
             </mat-option>
           </mat-select>
@@ -79,23 +79,23 @@
           <button mat-raised-button class="button" (click)="openDialog()">Options</button>
         </div>
         <div class="container-checkbox">
-          <mat-checkbox [(ngModel)]="isMoneyGameRoulette"
-                        name="isMoneyGameRoulette"
-                        (ngModelChange)="onMoneyGameRouletteChange($event)"
+          <mat-checkbox [checked]="roulette.isMoneyGameRoulette"
+                        (change)="roulette.isMoneyGameRoulette = !roulette.isMoneyGameRoulette"
+                        (ngModelChange)="onRouletteChange($event)"
           >Money game
           </mat-checkbox>
         </div>
         <div class="container-checkbox">
-          <mat-checkbox [(ngModel)]="isStage1Roulette"
-                        name="isStage1Roulette"
-                        (ngModelChange)="onStage1RouletteChange($event)"
+          <mat-checkbox [checked]="roulette.isStage1Roulette"
+                        (change)="roulette.isStage1Roulette = !roulette.isStage1Roulette"
+                        (ngModelChange)="onRouletteChange($event)"
           >Stage 1
           </mat-checkbox>
         </div>
         <div class="container-checkbox">
-          <mat-checkbox [(ngModel)]="isForceStage2Roulette"
-                        name="isForceStage2Roulette"
-                        (ngModelChange)="onForceStage2RouletteChange($event)"
+          <mat-checkbox [checked]="roulette.isForceStage2Roulette"
+                        (change)="roulette.isForceStage2Roulette = !roulette.isForceStage2Roulette"
+                        (ngModelChange)="onRouletteChange($event)"
           >Force stage 2
           </mat-checkbox>
         </div>

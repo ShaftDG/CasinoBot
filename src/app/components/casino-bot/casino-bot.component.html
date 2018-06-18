@@ -6,44 +6,19 @@
         <mat-tab-group class="demo-tab-group">
             <mat-tab label="General">
               <div class="demo-tab-content">
-                <app-general [gamesGeneralStage1]="gamesGeneralStage1"
-                             [providersGeneralStage1]="providersGeneralStage1"
-                             [(selectedValueGameGeneralStage1)] = "selectedValueGameGeneralStage1"
-                             [(selectedValueProviderGeneralStage1)] = "selectedValueProviderGeneralStage1"
-                >
+                <app-general [(general)] = "general">
                 </app-general>
               </div>
             </mat-tab>
             <mat-tab label="Blackjack">
               <div class="demo-tab-content">
-              <app-blackjack [(providersBlackjackStage1)]="providersBlackjackStage1"
-                             [(selectedValueProviderBlackjackStage1)] = "selectedValueProviderBlackjackStage1"
-                             [dataSourceBlackjack]="dataSourceBlackjack"
-                             [(isMoneyGameBlackjack)]="isMoneyGameBlackjack"
-                             [(isAutoPlayBlackjack)]="isAutoPlayBlackjack"
-                             [(isStage1Blackjack)]="isStage1Blackjack"
-                             [(isForceStage2Blackjack)]="isForceStage2Blackjack"
-                             [(dataOptionsBlackjack)]="dataOptionsBlackjack"
-                             [(dataSourceBettingOfPlayers)]="dataSourceBettingOfPlayers"
-              >
+              <app-blackjack [(blackjack)] = "blackjack">
               </app-blackjack>
               </div>
             </mat-tab>
             <mat-tab label="Roulette">
               <div class="demo-tab-content">
-                <app-roulette  [(selectedSetNumbersRouletteStage1)] = "selectedSetNumbersRouletteStage1"
-                               [(setNumbersRouletteStage1)]="setNumbersRouletteStage1"
-                               [(dataSourceRoulette)]="dataSourceRoulette"
-                               [(isMoneyGameRoulette)]="isMoneyGameRoulette"
-                               [(selectedVariantRouletteRouletteStage1)] = "selectedVariantRouletteRouletteStage1"
-                               [(variantRoulette)]="variantRoulette"
-                               [(isStage1Roulette)]="isStage1Roulette"
-                               [(isForceStage2Roulette)]="isForceStage2Roulette"
-                               [(dataOptionsRoulette)]="dataOptionsRoulette"
-                               [(numberSet)]="numberSet"
-                               [(betNumbers)]="betNumbers"
-                               [(betSet)]="betSet"
-                >
+                <app-roulette [(roulette)] = "roulette">
                 </app-roulette>
               </div>
             </mat-tab>

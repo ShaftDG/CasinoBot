@@ -17,7 +17,7 @@ export class CasinoBotService{
   private url = "http://localhost:64269/api/users/";
   constructor(private http: HttpClient){ }
 
-  getUsers(){
+  getBot(){
     return {
               stage1: {
                 general: {
@@ -38,7 +38,6 @@ export class CasinoBotService{
                   ELEMENT_DATA_BETTING: ELEMENT_DATA_BETTING
                 },
                 roulette: {
-                  selectedSetNumbersRouletteStage1: selectedSetNumbersRouletteStage1,
                   setNumbersRouletteStage1: setNumbersRouletteStage1,
                   numberSet: numberSet,
                   betSet: betSet,
@@ -126,7 +125,6 @@ const ELEMENT_DATA_BETTING: ElementOfBetting[] = [
 ];
 
 //variables Roulette Stage1
-const selectedSetNumbersRouletteStage1: string = 'split';
 const setNumbersRouletteStage1: SetNumbersRouletteStage1[] = [
   {value: 'split-0', viewValue: 'split'},
   {value: 'fourOfKind-1', viewValue: 'fourOfKind'},

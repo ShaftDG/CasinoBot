@@ -32,7 +32,6 @@ export interface General {
   providersGeneralStage1: ProvidersGeneralStage1[];
 }
 export interface Roulette {
-  selectedSetNumbersRouletteStage1: string;
   setNumbersRouletteStage1: SetNumbersRouletteStage1[];
   numberSet: number;
   betSet: number;
