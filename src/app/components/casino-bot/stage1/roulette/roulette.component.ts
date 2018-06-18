@@ -103,10 +103,10 @@ export class RouletteComponent implements OnInit {
         result.dataElementRoulette.setNumbers = setNs;
         const foundIndex = this.dataSourceRoulette.data.findIndex(x => x.setNumbers === setNs);
         this.dataSourceRoulette.data.splice(this.index, 1, result.dataElementRoulette);
-        console.log(setNs);
-        if ( // setNs !== 'split' ||
-             setNs !== 'fourOfKind' // ||
-            /* setNs !== 'sixLine'*/ ) {
+       // console.log(setNs);
+        if ( setNs !== 'split' &&
+             setNs !== 'fourOfKind' &&
+             setNs !== 'sixLine' ) {
           if (foundIndex !== this.index) {
             this.dataSourceRoulette.data.splice(foundIndex, 1);
           }
@@ -131,7 +131,8 @@ export class RouletteComponent implements OnInit {
     this.index = index;
     this.setNumbers = setNumbers;
     // for delete we use splice in order to remove single object from DataService
-    this.dataSourceRoulette.data.splice(this.index, 1);
+    this.dataSourceRoulette.data.splice(this.index +
+      (this.dataSourceRoulette.paginator.pageIndex * this.dataSourceRoulette.paginator.pageSize), 1);
     this.onRouletteChange(this.roulette);
     this.refreshTable();
   }
@@ -150,6 +151,9 @@ export class RouletteComponent implements OnInit {
       } else {
         this.dataSourceRoulette.paginator.previousPage();
         this.dataSourceRoulette.paginator.nextPage();
+      }
+      if ( this.dataSourceRoulette.data.length % this.dataSourceRoulette.paginator.pageSize === 0 ) {
+        this.dataSourceRoulette.paginator.previousPage();
       }
     this.dataSourceRoulette.paginator = this.paginator;
   }
