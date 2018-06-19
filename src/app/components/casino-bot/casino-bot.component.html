@@ -84,5 +84,20 @@
     <div class="button-row">
       <button mat-raised-button class="button " (click)="ngOnUpdate()">Apply</button>
     </div>
+  <div>
+    {{casinoBot.stage1.general | json}}
+  </div>
+  <p></p>
+  <div>
+    {{casinoBot.stage1.blackjack | json}}
+  </div>
+  <p></p>
+  <div>
+    {{casinoBot.stage1.roulette | json}}
+  </div>
+  <p></p>
+  <div>
+    {{casinoBot.stage1.slots | json}}
+  </div>
 </mat-card>
 
