@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SatPopoverModule } from '@ncstate/sat-popover';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
@@ -88,6 +89,7 @@ const routes: Routes = [
     MatExpansionModule,
     MatSlideToggleModule,
     SatPopoverModule,
+    MatProgressSpinnerModule,
 
     RouterModule.forRoot(routes)
   ],

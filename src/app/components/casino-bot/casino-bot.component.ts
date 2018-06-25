@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CasinoBot, Blackjack, General, Roulette, Slots } from './casino-bot';
 import { CasinoBotService } from './casino-bot.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-casino-bot',
@@ -11,7 +12,11 @@ import { CasinoBotService } from './casino-bot.service';
 export class CasinoBotComponent implements OnInit {
   title = 'CasinoBot 1.3.1';
 
-  casinoBot: CasinoBot;
+  id: string = '';
+
+
+  bots: any;
+  casinoBot: any;
 
   // variables General Stage1
   general: General;
@@ -24,52 +29,42 @@ export class CasinoBotComponent implements OnInit {
 
   // variables Slots Stage1
   slots: Slots;
-
-  constructor(private serv: CasinoBotService) {
-    // this.casinoBots = new Array<CasinoBot>();
-  }
+  isLoadingResults = true;
+  constructor(private serv: CasinoBotService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-   // this.loadUsers();
-    this.casinoBot = this.serv.getBot();
-    // variables General Stage1
-    this.general = this.casinoBot.stage1.general;
 
-    // variables Blackjack Stage1
-    this.blackjack = this.casinoBot.stage1.blackjack;
+    this.serv.getCasinoBots()
+      .subscribe(res => {
+        console.log(res);
+        this.bots = res;
+        this.casinoBot = this.bots[0];
+        this.general = this.casinoBot.stage1.general;
+        this.blackjack = this.casinoBot.stage1.blackjack;
+        this.roulette = this.casinoBot.stage1.roulette;
+        this.slots = this.casinoBot.stage1.slots;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = true;
+      });
 
-    // variables Roulette Stage1
-    this.roulette = this.casinoBot.stage1.roulette;
 
-    // variables Slots Stage1
-    this.slots = this.casinoBot.stage1.slots;
-
+    // this.getBookDetails(this.route.snapshot.params['id']);
   }
 
-  // загрузка бота
-/*   private loadUsers() {
-    this.serv.getUsers().subscribe((data: CasinoBot[]) => {
-      this.casinoBots = data;
-    });
-  }*/
+  updateCasinoBots() {
+    this.serv.updateCasinoBot(this.casinoBot._id, this.casinoBot)
+      .subscribe(res => {
+          let id = res['_id'];
+          this.router.navigate(['/casino-bot', id]);
+        }, (err) => {
+          console.log(err);
+        }
+      );
+  }
 
   ngOnUpdate() {
-   /* console.log("selectedValueGameGeneralStage1",this.selectedValueGameGeneralStage1);
-    console.log("selectedValueProviderGeneralStage1",this.selectedValueProviderGeneralStage1);
-    console.log("selectedValueProviderBlackjackStage1",this.selectedValueProviderBlackjackStage1);
-    */
-  /*  console.log("isMoneyGameBlackjack",this.isMoneyGameBlackjack);
-    console.log("isAutoPlayBlackjack",this.isAutoPlayBlackjack);
-    console.log("isStage1Blackjack",this.isStage1Blackjack);
-    console.log("isForceStage2Blackjack",this.isForceStage2Blackjack);*/
-
-    /*console.log("isMoneyGameRoulette",this.isMoneyGameRoulette);
-    console.log("isStage1Roulette",this.isStage1Roulette);
-    console.log("isForceStage2Roulette",this.isForceStage2Roulette);*/
-
-    // console.log("dataSourceBettingOfPlayers",this.dataSourceBettingOfPlayers.data);
-
-    // console.log("dataSourceRoulette",this.dataSourceRoulette.data);
     console.log('casinoBot', this.casinoBot);
   }
 }
