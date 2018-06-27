@@ -41,17 +41,14 @@ import { RouletteComponent, DialogOptionsRouletteComponent } from './components/
 import { AddDialogComponent } from './components/casino-bot/stage1/roulette/add-dialog/add-dialog.component';
 import { CasinoBotService } from './components/casino-bot/casino-bot.service';
 import { SlotsComponent, DialogOptionsSlotsComponent } from './components/casino-bot/stage1/slots/slots.component';
-import { HomeComponent } from './components/home/home.component';
 
-import { AuthGuard } from './_guards';
-import { AlertService, AuthenticationService, UserService } from './_services';
-import { LoginComponent } from './components/login/login.component';
+
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'casino-bot', component: CasinoBotComponent },
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
+  // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: 'login', component: LoginComponent },
   // { path: 'register', component: RegisterComponent },
 
   // otherwise redirect to home
@@ -72,7 +69,7 @@ const routes: Routes = [
     BlackjackComponent, DialogOptionsBlackjackComponent, DialogBettingOfPlayersComponent, InlineEditComponent,
     GeneralComponent,
     RouletteComponent, DialogOptionsRouletteComponent, AddDialogComponent,
-    SlotsComponent, DialogOptionsSlotsComponent, HomeComponent, LoginComponent
+    SlotsComponent, DialogOptionsSlotsComponent
   ],
   imports: [
     BrowserModule,
@@ -104,11 +101,7 @@ const routes: Routes = [
 
     RouterModule.forRoot(routes)
   ],
-  providers: [ AuthGuard,
-               AlertService,
-               AuthenticationService,
-               UserService,
-               CasinoBotService ],
+  providers: [ CasinoBotService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
