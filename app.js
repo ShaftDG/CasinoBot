@@ -12,6 +12,7 @@ mongoose.connect('mongodb://localhost/CasinoBots', { promiseLibrary: require('bl
 .catch((err) => console.error(err));
 
 var apiRouter = require('./routes/casinoBot');
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist/CasinoBot')));
 app.use('/', express.static(path.join(__dirname, 'dist/CasinoBot')));
 app.use('/api', apiRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

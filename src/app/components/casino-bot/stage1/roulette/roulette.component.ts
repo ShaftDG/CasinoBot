@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { ElementRoulette, Roulette, SetNumbersRouletteStage1 } from '../../casino-bot';
+import { ElementRoulette, Roulette, SetNumbersRouletteStage1 } from '../../../../_models/casino-bot';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
 

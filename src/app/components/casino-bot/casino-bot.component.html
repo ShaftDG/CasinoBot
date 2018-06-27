@@ -89,13 +89,13 @@
     </mat-card>
     <mat-card class="card">
         <div class="button-row">
-          <button mat-raised-button class="button " (click)="updateCasinoBots()">Apply</button>
+          <button mat-raised-button class="button" (click)="updateCasinoBots()">Apply</button>
         </div>
+     <!-- <div class="button-row">
+        <button mat-raised-button class="button" (click)="createCasinoBot()">Add</button>
+      </div>-->
       <div class="button-row">
-        <button mat-raised-button class="button ">Add</button>
-      </div>
-      <div class="button-row">
-        <button mat-raised-button class="button ">delete</button>
+        <button mat-raised-button class="button" (click)="deleteCasinoBot()" routerLink="">delete</button>
       </div>
       <div>
         {{casinoBot | json}}

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { General } from '../../casino-bot';
+import { General } from '../../../../_models/casino-bot';
 
 @Component({
   selector: 'app-general',

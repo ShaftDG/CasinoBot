@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { Slots } from '../../casino-bot';
+import { Slots } from '../../../../_models/casino-bot';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 import {FormControl, Validators} from '@angular/forms';

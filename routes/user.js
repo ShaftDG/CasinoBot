@@ -1,17 +1,55 @@
-var router = require('express').Router(); // импортируем роутер
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var User = require('../models/User.js');
 
-// импортируем модуль bcrypt для шифрования паролей
-//(мы же не собираемся хранить их в БД в открытом виде?)
 var bcrypt = require('bcrypt');
 
-// импортируем JWT для декодирования web-token'ов
 var jwt = require('jwt-simple');
-// импортируем модель пользователя
-var User = require('./models/User');
 
-// импортируем файл конфигурации
-//(баловство, конечно, надо генерировать это на лету и хранить где-нибудь)
-var config = require('../config');
+/*/!* GET ALL CASINOBOTS *!/
+router.get('/', function(req, res, next) {
+  CasinoBot.find(function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
+
+/!* GET SINGLE CASINOBOTS BY ID *!/
+router.get('/:id', function(req, res, next) {
+  CasinoBot.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});*/
+
+/* SAVE USER */
+router.post('/', function(req, res, next) {
+  var user = new User;
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.username = req.body.username;
+  var password = req.body.password;
+  bcrypt.hash(password, 10, function(err, hash){
+    if (err){res.sendStatus(500)}
+    else {
+      user.password = hash;
+      User.create(user, function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+      });
+    }
+  })
+});
+
+/*/!* UPDATE CASINOBOT *!/
+router.put('/:id', function(req, res, next) {
+  CasinoBot.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});*/
+
 
 
 /**

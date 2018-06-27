@@ -39,17 +39,21 @@ import {
 import { GeneralComponent } from './components/casino-bot/stage1/general/general.component';
 import { RouletteComponent, DialogOptionsRouletteComponent } from './components/casino-bot/stage1/roulette/roulette.component';
 import { AddDialogComponent } from './components/casino-bot/stage1/roulette/add-dialog/add-dialog.component';
-import { CasinoBotService } from './components/casino-bot/casino-bot.service';
-import { SlotsComponent, DialogOptionsSlotsComponent } from './components/casino-bot/stage1/slots/slots.component';
 
+import { CasinoBotService } from './_services/casino-bot.service';
+import { SharedService } from './_services/shared.service';
+
+import { SlotsComponent, DialogOptionsSlotsComponent } from './components/casino-bot/stage1/slots/slots.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 const routes: Routes = [
+  // { path: '', component: MainComponent },
   { path: 'about', component: AboutComponent },
   { path: 'casino-bot', component: CasinoBotComponent },
   // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   // { path: 'login', component: LoginComponent },
-  // { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
@@ -69,7 +73,7 @@ const routes: Routes = [
     BlackjackComponent, DialogOptionsBlackjackComponent, DialogBettingOfPlayersComponent, InlineEditComponent,
     GeneralComponent,
     RouletteComponent, DialogOptionsRouletteComponent, AddDialogComponent,
-    SlotsComponent, DialogOptionsSlotsComponent
+    SlotsComponent, DialogOptionsSlotsComponent, RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +105,9 @@ const routes: Routes = [
 
     RouterModule.forRoot(routes)
   ],
-  providers: [ CasinoBotService ],
+  providers: [ CasinoBotService,
+               SharedService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

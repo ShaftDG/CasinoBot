@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-content>
+    <div class="container-input">
+      <mat-form-field class="input">
+        <input matInput type="number"
+               step="0.1"
+               placeholder="Amount of replenishment"
+               [(ngModel)]="data.amountOfReplenishment" name="amountOfReplenishment"
+               required >
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+</mat-card>

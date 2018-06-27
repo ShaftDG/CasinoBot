@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Inject, Optional, Host } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { ElementOfBetting, ElementOfMainTable, Blackjack } from '../../casino-bot';
+import { ElementOfBetting, ElementOfMainTable, Blackjack } from '../../../../_models/casino-bot';
 import { SatPopover } from '@ncstate/sat-popover';
 import { filter } from 'rxjs/operators';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';

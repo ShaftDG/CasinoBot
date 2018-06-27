@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import {
-  CasinoBot,
   ElementOfBetting,
   ElementOfMainTable, ElementRoulette,
   GamesGeneralStage1,
   OptionsElementsBlackjack, OptionsElementsRoulette, OptionsElementsSlot,
   ProvidersBlackjackStage1,
   ProvidersGeneralStage1, SetNumbersRouletteStage1, VariantRoulette, VariantSlots,
-} from './casino-bot';
+} from '../_models/casino-bot';
+import { CasinoBot } from '../_models/casino-bot';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
@@ -80,9 +80,9 @@ export class CasinoBotService {
         catchError(this.handleError)
       );
   }
-}
 
- /* getBot() {
+
+  getBot() {
     return {
               stage1: {
                 general: {
@@ -257,4 +257,4 @@ const coinValue: number[] = [ 0.01, 0.05, 0.1, 0.25, 0.5, 1.0 ];
 
 const isMoneyGameSlot = false;
 const isStage1Slot = false;
-const isForceStage2Slot = false;*/
+const isForceStage2Slot = false;
