@@ -12,11 +12,11 @@
          routerLink="/casino-bot">CasinoBot 1.3.1
       </a>
       <a mat-list-item routerLink="/about">About</a>
-      <mat-card class="card">
-        <div class="button-row">
+
+        <div class="button-bottom-left">
           <button mat-raised-button class="button" (click)="createCasinoBot()">Add</button>
         </div>
-      </mat-card>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -30,6 +30,12 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{title}}</span>
+      <div class="button-top-right">
+        <button mat-raised-button class="button" [routerLink]="['/login']">Logout</button>
+      </div>
+      <div class="button-top-right1">
+        <button mat-raised-button class="button" (click)="userRegister()">Register</button>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

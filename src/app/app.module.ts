@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -42,18 +42,41 @@ import { AddDialogComponent } from './components/casino-bot/stage1/roulette/add-
 
 import { CasinoBotService } from './_services/casino-bot.service';
 import { SharedService } from './_services/shared.service';
+import { UserService } from './_services/user.service';
 
 import { SlotsComponent, DialogOptionsSlotsComponent } from './components/casino-bot/stage1/slots/slots.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
+import { AlertComponent } from './_directives';
+import { AuthGuard } from './_guards';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AlertService, AuthenticationService } from './_services';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterDialogComponent } from './main/register-dialog/register-dialog.component';
 
 const routes: Routes = [
   // { path: '', component: MainComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'casino-bot', component: CasinoBotComponent },
+  // { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  // { path: 'casino-bot', component: CasinoBotComponent, canActivate: [AuthGuard] },
   // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  // { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '',
+    component: MainComponent,
+    children: [
+      {
+        path: 'casino-bot',
+        component: CasinoBotComponent
+      },
+      {
+        path: 'about',
+        component: AboutComponent
+      }
+    ],
+    canActivate: [AuthGuard]
+  },
+  // { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
@@ -63,7 +86,7 @@ const routes: Routes = [
   entryComponents: [
     BlackjackComponent, DialogOptionsBlackjackComponent, DialogBettingOfPlayersComponent,
     RouletteComponent, DialogOptionsRouletteComponent, AddDialogComponent,
-    SlotsComponent, DialogOptionsSlotsComponent
+    SlotsComponent, DialogOptionsSlotsComponent, RegisterDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -73,7 +96,9 @@ const routes: Routes = [
     BlackjackComponent, DialogOptionsBlackjackComponent, DialogBettingOfPlayersComponent, InlineEditComponent,
     GeneralComponent,
     RouletteComponent, DialogOptionsRouletteComponent, AddDialogComponent,
-    SlotsComponent, DialogOptionsSlotsComponent, RegisterComponent
+    SlotsComponent, DialogOptionsSlotsComponent, RegisterComponent, LoginComponent, HomeComponent,
+    AlertComponent,
+    RegisterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -105,8 +130,15 @@ const routes: Routes = [
 
     RouterModule.forRoot(routes)
   ],
-  providers: [ CasinoBotService,
-               SharedService
+  providers: [
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    CasinoBotService,
+    SharedService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

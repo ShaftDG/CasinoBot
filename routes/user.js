@@ -7,13 +7,15 @@ var bcrypt = require('bcrypt');
 
 var jwt = require('jwt-simple');
 
-/*/!* GET ALL CASINOBOTS *!/
+/!* GET ALL USERS *!/
 router.get('/', function(req, res, next) {
-  CasinoBot.find(function (err, products) {
+  User.find(function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
 });
+
+/*
 
 /!* GET SINGLE CASINOBOTS BY ID *!/
 router.get('/:id', function(req, res, next) {
@@ -25,16 +27,12 @@ router.get('/:id', function(req, res, next) {
 
 /* SAVE USER */
 router.post('/', function(req, res, next) {
-  var user = new User;
-  user.firstName = req.body.firstName;
-  user.lastName = req.body.lastName;
-  user.username = req.body.username;
   var password = req.body.password;
   bcrypt.hash(password, 10, function(err, hash){
     if (err){res.sendStatus(500)}
     else {
-      user.password = hash;
-      User.create(user, function (err, post) {
+      req.body.password = hash;
+      User.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
       });
@@ -58,7 +56,7 @@ router.put('/:id', function(req, res, next) {
  * При любых ошибках выдает статус 500 - Internal Server Error
  * При удаче - возвращает 201
  */
-router.post('/user', function (req, res, next){
+/*router.post('/user', function (req, res, next){
   var user = new User;
   user.username = req.body.username;
   var password = req.body.password;
@@ -74,7 +72,7 @@ router.post('/user', function (req, res, next){
       })
     }
   })
-});
+});*/
 
 /**
  * При поступлении запроса типа GET эта функция
@@ -85,7 +83,7 @@ router.post('/user', function (req, res, next){
  * При любых ошибках возвращает 500 - Internal Server Error
  * При успехе возвращает JSON объекта user (без пароля, естественно)
  */
-router.get('/user', function (req, res, next) {
+/*router.get('/user', function (req, res, next) {
   if(!req.headers['x-auth']) {
     return res.sendStatus(401)
   }
@@ -100,6 +98,6 @@ router.get('/user', function (req, res, next) {
       res.json(user)
     }
   })
-})
+})*/
 
 module.exports = router;

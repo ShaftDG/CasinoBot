@@ -2,9 +2,12 @@ import { OnInit, Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {CasinoBotService} from '../_services/casino-bot.service';
+import { CasinoBotService } from '../_services/casino-bot.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SharedService } from '../_services/shared.service';
+import { MatDialog } from '@angular/material';
+import { UserService } from '../_services/user.service';
+import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 
 @Component({
   selector: 'app-main',
@@ -17,16 +20,48 @@ export class MainComponent implements OnInit {
   bots: any;
   showBot: boolean = false;
 
-  title = 'Bots of casino games'
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+
+  title = 'Bots of casino games';
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private serv: CasinoBotService,
-              private router: Router, private route: ActivatedRoute,
+              private router: Router, private route: ActivatedRoute, public dialog: MatDialog,
+              private userService: UserService,
               ss: SharedService) {
     this.ss = ss;
+  }
+
+  // add Bet
+  userRegister() {
+    const dialogRef = this.dialog.open(RegisterDialogComponent, {
+      width: '400px',
+      data: {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        username: this.username,
+        password: this.password,
+      },
+      disableClose: true,
+      closeOnNavigation: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.postUser(result)
+          .subscribe(res => {
+            this.router.navigate(['']);
+          }, (err) => {
+            console.log(err);
+          });
+      }
+    });
   }
 
   createCasinoBot() {
@@ -40,9 +75,16 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ss.getEmittedValue()
-      .subscribe(item => this.showBot = item);
 
+    this.ngOnGetCasinoBot();
+
+    this.ss.getEmittedValue()
+      .subscribe(item => {
+        this.ngOnGetCasinoBot();
+      });
+  }
+
+  ngOnGetCasinoBot() {
     this.serv.getCasinoBots()
       .subscribe(res => {
         this.bots = res;

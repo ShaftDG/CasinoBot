@@ -69,7 +69,7 @@ export class RouletteComponent implements OnInit {
     });
   }
 
-  // add Bet
+  // edit Bet
   editItem(index: number, setNumbers: string, bets: number, sessionBet: boolean) {
     this.dataDialog.dataElementRoulette = {
         setNumbers: setNumbers,

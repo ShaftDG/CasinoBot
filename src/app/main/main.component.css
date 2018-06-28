@@ -18,3 +18,26 @@
 mat-sidenav {
   width: 80%;
 }
+
+.button-bottom-left {
+  position: absolute;
+  left: 10px;
+  bottom: 30px;
+  width: 90px;
+}
+
+.button-top-right {
+  position: absolute;
+  right: 10px;
+  width: 90px;
+}
+
+.button-top-right1 {
+  position: absolute;
+  right: 110px;
+  width: 90px;
+}
+
+.button {
+  margin-right: 1%;
+}
