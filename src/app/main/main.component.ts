@@ -8,6 +8,8 @@ import { SharedService } from '../_services/shared.service';
 import { MatDialog } from '@angular/material';
 import { UserService } from '../_services/user.service';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-main',
@@ -34,8 +36,18 @@ export class MainComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver, private serv: CasinoBotService,
               private router: Router, private route: ActivatedRoute, public dialog: MatDialog,
               private userService: UserService,
-              ss: SharedService) {
+              ss: SharedService,
+              iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     this.ss = ss;
+    iconRegistry.addSvgIcon(
+      'exit_to_app',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/image/exit_to_app.svg'));
+    iconRegistry.addSvgIcon(
+      'register',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/image/register.svg'));
+    iconRegistry.addSvgIcon(
+      'about',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/image/about.svg'));
   }
 
   // add Bet

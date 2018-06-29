@@ -1,0 +1,47 @@
+.container-button-login {
+  width: calc( 100% / 2);
+  text-align: left;
+}
+
+.button {
+  margin: auto;
+  margin-left: 2%;
+  width: 25%;
+}
+
+.header {
+  margin: auto;
+  margin-left: 5%;
+  width: 25%;
+}
+
+.card-login {
+  margin: auto;
+  margin-top: 10%;
+  width: 25%;
+}
+
+@media all and (max-width:1366px) {
+  .card-login {
+    margin: auto;
+    margin-top: 5%;
+    width: 50%;
+  }
+}
+
+@media all and (max-width:420px) {
+  .card-login {
+    margin: auto;
+    margin-top: 10%;
+    width: 70%;
+  }
+}
+
+.input {
+  width: 100%;
+}
+
+.container-input {
+  width: 100%;
+  text-align: center;
+}

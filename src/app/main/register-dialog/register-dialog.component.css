@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+}
+
+.container > * {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  padding-top: 6px;
+}
+
+.mat-form-field {
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.chose-info {
+  font-size: 14pt;
+  text-align: center;
+}
+
+.dialog-input {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+.input-stage2 {
+  width: calc(95%/2);
+  margin-right: 2%;
+}
+
+.input-stage1 {
+  width: calc(94%/3);
+  margin-right: 2%;
+}
+
+.container-input {
+  width: 100%;
+  text-align: center;
+}
+
+.container-button-save {
+  width: calc( 100% / 2);
+  text-align: right;
+}
+
+.container-button-cancel {
+  width: calc( 100% / 2);
+  text-align: left;
+}

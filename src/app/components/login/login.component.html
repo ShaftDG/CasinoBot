@@ -1,0 +1,40 @@
+<mat-card class="card-login mat-elevation-z8">
+    <form #formControl="ngForm">
+      <h2 class="header">Login</h2>
+      <div mat-dialog-content style="padding: 10px">
+        <mat-card>
+          <mat-card-content>
+            <div class="container-input">
+              <mat-form-field class="input">
+                <input matInput
+                       #input
+                       type="string"
+                       placeholder="Username"
+                       [(ngModel)]="username" name="username"
+                       required >
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field class="input">
+                <input matInput
+                       #input
+                       type="password"
+                       placeholder="password"
+                       [(ngModel)]="password" name="password"
+                       required >
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div mat-dialog-actions>
+        <div>
+          <button mat-button class="button"
+                  [disabled]="!formControl.valid"
+                  (click)="onLogin()">Login</button>
+        </div>
+      </div>
+
+    </form>
+</mat-card>

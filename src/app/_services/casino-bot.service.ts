@@ -22,6 +22,8 @@ const apiUrl = '/api';
 })
 export class CasinoBotService {
 
+  bots: any;
+
   constructor(private http: HttpClient) {
   }
 
@@ -43,6 +45,15 @@ export class CasinoBotService {
   private extractData(res: Response) {
     let body = res;
     return body || {};
+  }
+
+  get() {
+    this.getCasinoBots()
+      .subscribe(res => {
+        this.bots = res;
+      }, err => {
+        console.log(err);
+      });
   }
 
   getCasinoBots(): Observable<any> {

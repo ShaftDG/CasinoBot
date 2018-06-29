@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 300px;
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
 
@@ -38,6 +38,17 @@ mat-sidenav {
   width: 90px;
 }
 
+.about {
+  position: absolute;
+  right: 210px;
+  width: 90px;
+}
+
 .button {
   margin-right: 1%;
+}
+
+.menu {
+  position: absolute;
+  right: 10px;
 }

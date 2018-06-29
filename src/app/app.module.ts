@@ -26,6 +26,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
@@ -64,7 +65,11 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'casino-bot',
+        path: 'bot/:id',
+        redirectTo: 'casino-bot/:id'
+      },
+      {
+        path: 'casino-bot/:id',
         component: CasinoBotComponent
       },
       {
@@ -127,6 +132,7 @@ const routes: Routes = [
     MatSlideToggleModule,
     SatPopoverModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
 
     RouterModule.forRoot(routes)
   ],

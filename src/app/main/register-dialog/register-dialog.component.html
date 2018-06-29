@@ -1,0 +1,62 @@
+<form #formControl="ngForm">
+
+  <mat-card>
+    <mat-card-content>
+
+        <mat-form-field class="input">
+          <input matInput
+                 #input
+                 type="string"
+                 placeholder="First name"
+                 [(ngModel)]="data.firstName"
+                 name="firstName"
+                 required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input">
+          <input matInput
+                 #input
+                 type="string"
+                 placeholder="Last name"
+                 [(ngModel)]="data.lastName" name="lastName"
+                 required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input">
+          <input matInput
+                 #input
+                 type="string"
+                 placeholder="Username"
+                 [(ngModel)]="data.username" name="username"
+                 required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input">
+          <input matInput
+                 #input
+                 type="password"
+                 autocomplete="off"
+                 placeholder="password"
+                 [(ngModel)]="data.password" name="password"
+                 required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+    </mat-card-content>
+  </mat-card>
+
+
+  <div mat-dialog-actions>
+    <div class="container-button-cancel">
+    <button mat-button
+            (click)="onNoClick()"
+            tabindex="-1">Cancel</button>
+    </div>
+    <div class="container-button-save">
+        <button mat-button
+                [disabled]="!formControl.valid"
+                [mat-dialog-close]="data">Save</button>
+    </div>
+  </div>
+
+</form>
