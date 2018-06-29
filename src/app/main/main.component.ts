@@ -48,6 +48,9 @@ export class MainComponent implements OnInit {
     iconRegistry.addSvgIcon(
       'about',
       sanitizer.bypassSecurityTrustResourceUrl('assets/image/about.svg'));
+    iconRegistry.addSvgIcon(
+      'menu_account',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/image/menu_account.svg'));
   }
 
   // add Bet
