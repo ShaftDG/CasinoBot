@@ -4,7 +4,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { ElementRoulette, Roulette, SetNumbersRouletteStage1 } from '../../../../_models/casino-bot';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
+import { pluck } from 'rxjs/operators';
 @Component({
   selector: 'app-roulette',
   templateUrl: './roulette.component.html',
@@ -29,7 +30,8 @@ export class RouletteComponent implements OnInit {
     this.rouletteChange.emit(model);
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+              private route: ActivatedRoute) { }
 
   // add Bet
   addItem() {
@@ -163,8 +165,12 @@ export class RouletteComponent implements OnInit {
   ngOnInit() {
     this.displayedColumns = ['setNumbers', 'bets', 'sessionBet', 'actions'];
     this.pageSize = 5;
-    this.dataSourceRoulette = new MatTableDataSource<ElementRoulette>(this.roulette.ELEMENT_DATA_ROULETTE);
-    this.dataSourceRoulette.paginator = this.paginator;
+    this.route.params
+      .subscribe(url => {
+        console.log('The URL changed to: ' + url['id']);
+        this.dataSourceRoulette = new MatTableDataSource<ElementRoulette>(this.roulette.ELEMENT_DATA_ROULETTE);
+        this.dataSourceRoulette.paginator = this.paginator;
+      });
     this.dataDialog = {
       dataElementRoulette: {
         setNumbers: '',
@@ -174,7 +180,6 @@ export class RouletteComponent implements OnInit {
       selectValue: this.roulette.setNumbersRouletteStage1
     };
   }
-
 }
 
 @Component({

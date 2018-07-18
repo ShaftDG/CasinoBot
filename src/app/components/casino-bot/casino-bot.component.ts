@@ -49,7 +49,7 @@ export class CasinoBotComponent implements OnInit {
           this.casinoBot = res;
           this.general = this.casinoBot.stage1.general;
           this.blackjack = this.casinoBot.stage1.blackjack;
-          this.roulette = this.casinoBot.stage1.roulette;
+          this.roulette = res.stage1.roulette;
           this.slots = this.casinoBot.stage1.slots;
 
           this.isLoadingResults = false;
